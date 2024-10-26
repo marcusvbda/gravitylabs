@@ -14,7 +14,6 @@ class LandingPagesController extends Controller
             return redirect(route('app.dashboard'));
         }
 
-        return redirect(route('app.dashboard'));
-        // return view('lps.home');
+        return view('lps.home');
     }
 }

@@ -1,8 +1,9 @@
 <form class="space-y-4 md:space-y-6" wire:submit="submit">
     <x-input label="Your Email" type="email" required placeholder="name@company.com" model="email" />
     <x-input label="Password" type="password" required placeholder="••••••••" model="password" />
+    <input disabled type="hidden" wire:model="redirectTo" />
     <div class="flex items-center justify-between">
-        <x-checkbox label="Remember me" />
+        <x-checkbox label="Remember me" model="remember" />
         {{-- <x-link href="#">Forgot password?</x-link> --}}
     </div>
     <x-button class="w-full" type="submit">

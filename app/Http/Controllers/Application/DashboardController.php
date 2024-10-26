@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Application;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
 
 class DashboardController extends Controller
 {
-    public function index(): String
+    public function index(): View
     {
-        return "dashboard";
+        return view('application.dashboard');
     }
 }
