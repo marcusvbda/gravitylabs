@@ -14,6 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'logo' => env('APP_LOGO', 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg'),
 
     /*
     |--------------------------------------------------------------------------
