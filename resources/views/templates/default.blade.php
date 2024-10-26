@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 @php
-    $defaultTheme = config('app.theme');
+    $defaultTheme = config('app.default_theme');
 @endphp
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="@yield('theme', $defaultTheme)">
 

@@ -55,10 +55,10 @@ export default {
     },
     plugins: [],
     safelist: [
-        'text-green-800 border-green-300 bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800',
-        'text-blue-800 bg-blue-50 dark:bg-gray-800 dark:text-blue-400',
-        'text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400',
-        'text-yellow-800 bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300'
+        'text-green-800 border-green-300 bg-green-50 dark:text-green-400 dark:border-green-800',
+        'text-blue-800 bg-blue-50 dark:text-blue-400',
+        'text-red-800 bg-red-50 dark:text-red-400',
+        'text-yellow-800 bg-yellow-50 dark:text-yellow-300'
     ],
 };
 

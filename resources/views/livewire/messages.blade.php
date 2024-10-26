@@ -11,10 +11,10 @@
             </svg>
             <span class="sr-only">Info</span>
             <div class="ms-3 text-sm font-medium">
-                {!! data_get($message, 'title') !!}
+                {!! data_get($message, 'text') !!}
             </div>
             <button type="button" wire:click="removeMessage('{{ data_get($message, 'uid') }}')"
-                class="ms-auto -mx-1.5 -my-1.5 rounded-lg focus:ring-2p-1.5 inline-flex items-center justify-center h-8 w-8 {{ $colors[data_get($message, 'type')] }} dark:hover:bg-gray-700"
+                class="ms-auto -mx-1.5 -my-1.5 rounded-lg focus:ring-2p-1.5 inline-flex items-center justify-center h-8 w-8 {{ $colors[data_get($message, 'type')] }}"
                 data-dismiss-target="#alert-1" aria-label="Close">
                 <span class="sr-only">Close</span>
                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
