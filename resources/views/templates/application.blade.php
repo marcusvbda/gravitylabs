@@ -2,7 +2,7 @@
 
 @section('body')
     <x-navbar :items="[
-        'Apps' => 'app.applications',
+        'Apps' => 'app.applications.index',
     ]">
     </x-navbar>
     <div class="flex flex-col md:flex-row">

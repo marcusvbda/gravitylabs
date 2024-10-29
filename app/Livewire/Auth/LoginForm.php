@@ -15,7 +15,7 @@ class LoginForm extends Component
 
     public function mount()
     {
-        $this->redirectTo = request()?->redirectTo ?? route('app.applications');
+        $this->redirectTo = request()?->redirectTo ?? route('app.applications.index');
     }
 
     public function submit()

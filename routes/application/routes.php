@@ -12,6 +12,9 @@ Route::group(['prefix' => 'auth', 'as' => 'auth.'], function () {
 
 Route::middleware([authMiddleware::class])->group(function () {
     Route::group(['prefix' => 'app', 'as' => 'app.'], function () {
-        Route::get('/', [ApplicationsController::class, 'index'])->name('applications');
+        Route::get('/', fn() => redirect(route('app.applications.index')));
+        Route::group(['prefix' => 'applications', 'as' => 'applications.'], function () {
+            Route::get('/', [ApplicationsController::class, 'index'])->name('index');
+        });
     });
 });
