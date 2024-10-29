@@ -2,6 +2,11 @@
 @section('title', 'Dashboard')
 @section('theme', Auth::user()->settings?->theme ?? config('app.default_theme'))
 
+{{-- @section('sidebar', null) --}}
+@section('sidebar')
+    menus applications
+@endsection
+
 @section('content')
     <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
         <div class="grid grid-cols-3 gap-4 mb-4">

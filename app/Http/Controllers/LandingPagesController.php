@@ -11,7 +11,7 @@ class LandingPagesController extends Controller
     public function index(): View|RedirectResponse
     {
         if (Auth::check()) {
-            return redirect(route('app.dashboard'));
+            return redirect(route('app.applications'));
         }
 
         return view('lps.home');

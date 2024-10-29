@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Application\DashboardController;
+use App\Http\Controllers\Application\ApplicationsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\authMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +12,6 @@ Route::group(['prefix' => 'auth', 'as' => 'auth.'], function () {
 
 Route::middleware([authMiddleware::class])->group(function () {
     Route::group(['prefix' => 'app', 'as' => 'app.'], function () {
-        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/', [ApplicationsController::class, 'index'])->name('applications');
     });
 });

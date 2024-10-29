@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Application;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
 
-class DashboardController extends Controller
+class ApplicationsController extends Controller
 {
     public function index(): View
     {
-        return view('application.dashboard');
+        return view('application.applications.index');
     }
 }

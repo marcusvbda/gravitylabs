@@ -23,7 +23,7 @@
                 </button>
             </div>
             <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <a href="{{ route('app.dashboard') }}" class="flex flex-shrink-0 items-center cursor-pointer">
+                <a href="{{ route('app.applications') }}" class="flex flex-shrink-0 items-center cursor-pointer">
                     <img class="h-8 w-auto" src="{{ config('app.logo') }}" alt="{{ config('app.name') }}}">
                 </a>
                 <div class="hidden sm:ml-6 sm:block">
