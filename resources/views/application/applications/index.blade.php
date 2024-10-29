@@ -4,7 +4,7 @@
 
 {{-- @section('sidebar', null) --}}
 @section('sidebar')
-    menus applications
+    <x-sidebar></x-sidebar>
 @endsection
 
 @section('content')

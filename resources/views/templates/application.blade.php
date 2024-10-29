@@ -7,9 +7,9 @@
     </x-navbar>
     <div class="flex flex-col md:flex-row">
         @hasSection('sidebar')
-            <div class="bg-gray-200 dark:bg-gray-800 border-r border-gray-300/50 dark:border-gray-700 w-full md:w-2/12">
+            <aside class="bg-gray-200 dark:bg-gray-800 border-r border-gray-300/50 dark:border-gray-700 w-full md:w-2/12">
                 @yield('sidebar')
-            </div>
+            </aside>
         @endif
         <div class="w-full @hasSection('name')
 md:w-10/12

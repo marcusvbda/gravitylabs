@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Template;
 
-use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 use Auth;
 
