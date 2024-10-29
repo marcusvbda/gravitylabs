@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'root@root.com',
             'password' => bcrypt('roottoor'),
             'email_verified_at' => now(),
+            'settings' => ['theme' => 'light'],
         ]);
     }
 }

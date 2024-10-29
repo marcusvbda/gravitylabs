@@ -1,6 +1,6 @@
 @extends('templates.application')
 @section('title', 'Dashboard')
-@section('theme', 'ligth')
+@section('theme', Auth::user()->settings?->theme ?? config('app.default_theme'))
 
 @section('content')
     <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
