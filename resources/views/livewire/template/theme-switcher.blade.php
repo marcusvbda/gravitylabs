@@ -1,5 +1,5 @@
 <button type="button" wire:click="toggleTheme"
-    class="relative cursor-pointer rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+    class="relative cursor-pointer rounded-full dark:bg-gray-800 p-1 text-gray-400 hover:text-gray-500 dark:hover:text-white focus:outline-none">
     <span class="absolute -inset-1.5"></span>
     <span class="sr-only">Theme switcher</span>
     @if ($theme == 'dark')
