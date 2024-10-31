@@ -16,7 +16,9 @@
     @livewireStyles
 </head>
 
-@yield('body')
+<body>
+    @yield('body')
+</body>
 @livewireScripts
 
 </html>

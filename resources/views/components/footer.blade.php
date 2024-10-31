@@ -14,8 +14,9 @@
                     <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
                         <li class="mb-4">
-                            <a href="{{ route('app.applications.index') }}"
-                                class="hover:underline">{{ config('app.name') }}</a>
+                            <a href="{{ route('app.applications.index') }}" class="hover:underline">
+                                {{ config('app.name') }}
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -23,7 +24,7 @@
                     <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow us</h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
                         <li class="mb-4">
-                            <a href="https://github.com/marcusvbda" class="hover:underline ">Github</a>
+                            <a href="https://github.com/marcusvbda" target="_blank" class="hover:underline ">Github</a>
                         </li>
                         {{-- <li>
                             <a href="https://discord.gg/4eeurUVvTy" class="hover:underline">Discord</a>
@@ -76,7 +77,7 @@
                     </svg>
                     <span class="sr-only">Twitter page</span>
                 </a> --}}
-                    <a href="https://github.com/marcusvbda"
+                    <a href="https://github.com/marcusvbda" target="_blank"
                         class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 20 20">

@@ -42,7 +42,7 @@
                 @livewire('template.theme-switcher')
                 <x-dropdown-menu class="ml-3">
                     <x-slot name="source">
-                        <x-avatar size="8"></x-avatar>
+                        <x-avatar size="8" />
                     </x-slot>
                     <x-slot name="content">
                         <div class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200" role="menuitem"
