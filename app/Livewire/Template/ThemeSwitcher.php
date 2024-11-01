@@ -21,7 +21,7 @@ class ThemeSwitcher extends Component
         $settings->theme = $this->theme;
         $user->settings = $settings;
         $user->save();
-        $this->js('window.location.reload()');
+        $this->dispatch('theme-changed', $this->theme);
     }
 
     public function render()

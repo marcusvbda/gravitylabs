@@ -16,3 +16,13 @@
         </svg>
     @endif
 </button>
+
+@script
+    <script>
+        $wire.on('theme-changed', (val) => {
+            const el = document.documentElement;
+            el.classList.remove(...el.classList);
+            el.classList.add(val[0]);
+        });
+    </script>
+@endscript
