@@ -1,13 +1,15 @@
 <div class="p-2 bg-primary-100 dark:bg-gray-800 rounded-3xl flex items-center group cursor-pointer">
     <div
         class="size-20 min-w-20 bg-primary-600 rounded-2xl flex items-center justify-center text-white text-5xl font-bold">
-        S
+        {{ substr($name, 0, 1) }}
     </div>
     <div class="flex-1 flex flex-col gap-2 px-4 overflow-hidden">
         <h4 class="font-bold text-primary-600 text-lg truncate">
-            asdaddsasdaddsasdaddsasdaddsasdaddsasdadd sasdaddsasdaddsasdaddsasdaddsasdadds
+            {{ $name }}
         </h4>
-        <small class="text-gray-500 text-xs">Last updated Oct 23, 2024</small>
+        <small class="text-gray-500 text-xs">
+            {{ $description }}
+        </small>
     </div>
     <div class="text-gray-700 group-hover:text-blue-600 transition duration-300">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">

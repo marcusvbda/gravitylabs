@@ -2,58 +2,55 @@
 
 namespace App\Livewire\Crud;
 
+use Illuminate\Support\Collection;
 use Livewire\Component;
-use Livewire\Attributes\Computed;
+
 
 class Index extends Component
 {
-    public $qty = 0;
     public $icon;
     public $label;
     public $plural;
     public $title;
     public $createBtnText;
-    // public $total = 0;
-    public $total = 24;
-    public $perPage = 10;
-    public $listCount = 10;
+    public $model;
+    public Collection $items;
+    public $total = null;
+    public $limit = 3;
+    public $hasMorePages = false;
     public $search = "";
     public $sortBy = "updated_at";
 
-    // public function mount()
-    // {
-    //     $this->listCount = $this->perPage;
-    // }
 
     public function updated($field)
     {
         if (in_array($field, ["search", "sortBy"])) {
-            $this->triggerAction();
+            $this->loadList();
         }
     }
 
-    // #[Computed]
-    // public function listCount()
-    // {
-    //     // 
-    // }
-
-    #[Computed]
-    public function hasMoreItems()
+    public function resetSearch()
     {
-        return $this->listCount < $this->total;
+        $this->search = "";
+        $this->loadList();
     }
 
-    public function triggerAction()
+
+    public function loadList($skip = 0)
     {
-        sleep(1);
-        $this->listCount = $this->perPage;
+        $query = app()->make($this->model)
+            ->where('name', 'like', "%{$this->search}%")
+            ->orderBy($this->sortBy, 'desc');
+
+        $this->total = $query->count();
+        $query = $query->take($this->limit)->skip($skip);
+        $this->items = !$skip ?  $query->get() : $this->items->toBase()->merge($query->get());
+        $this->hasMorePages = $this->items->count() < $this->total;
     }
 
     public function loadMore()
     {
-        sleep(1);
-        $this->listCount += $this->perPage;
+        $this->loadList($this->items->count());
     }
 
     public function render()

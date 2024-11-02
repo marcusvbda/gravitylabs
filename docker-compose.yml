@@ -16,7 +16,7 @@ services:
             - app-network
 
     webserver:
-        image: nginx:stable-alpine
+        image: nginx:alpine # Mudado para nginx:alpine
         container_name: gravitylabs_webserver
         ports:
             - "8000:80"
@@ -29,17 +29,31 @@ services:
             - app-network
 
     database:
-        image: postgres:15
+        image: mysql:8
         container_name: gravitylabs_dbserver
         restart: unless-stopped
         environment:
-            POSTGRES_USER: user
-            POSTGRES_PASSWORD: password
-            POSTGRES_DB: gravitylabs
+            MYSQL_ROOT_PASSWORD: root_password
+            MYSQL_DATABASE: gravitylabs
+            MYSQL_USER: user
+            MYSQL_PASSWORD: password
         ports:
-            - "5432:5432"
+            - "3306:3306"
         volumes:
-            - ./config/_docker/dbdata:/var/lib/postgresql/data
+            - ./config/_docker/dbdata:/var/lib/mysql
+        networks:
+            - app-network
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: gravitylabs_phpmyadmin
+        restart: unless-stopped
+        environment:
+            PMA_HOST: database
+            PMA_USER: user
+            PMA_PASSWORD: password
+        ports:
+            - "8080:80"
         networks:
             - app-network
 

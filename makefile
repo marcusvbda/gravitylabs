@@ -1,7 +1,20 @@
 YELLOW=\033[33m
 RESET=\033[0m
 
-install build:
+set-node-version:
+	@echo "$(YELLOW)Setting up node version...$(RESET)"
+	@NVM_DIR="$${HOME}/.nvm" && . "$${NVM_DIR}/nvm.sh" && nvm use
+
+start-dev:
+	@$(MAKE) set-node-version
+	@yarn run dev
+
+start-prod:
+	@$(MAKE) set-node-version
+	@yarn run build
+	@yarn run start
+
+build:
 	@echo "$(YELLOW)Building containers...$(RESET)"
 	@docker compose up -d --build --force-recreate
 	@echo "$(YELLOW)Installing backend dependencies...$(RESET)"
