@@ -35,7 +35,6 @@ class Index extends Component
         $this->loadList();
     }
 
-
     public function loadList($skip = 0)
     {
         $query = app()->make($this->model)

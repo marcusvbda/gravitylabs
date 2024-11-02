@@ -8,7 +8,7 @@
         ]" />
     @endsection
 
-    <h4
+    <h4 wire:ignore
         class="text-3xl flex items-center gap-2 text-gray-800 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-6">
         {!! $this->icon !!}
         {!! $this->title !!}
@@ -85,15 +85,20 @@
                     </div>
 
                     @if ($this->hasMorePages)
-                        <div class="w-full py-10 flex items-center justify-center" wire:loading.remove>
+                        <div class="w-full py-10 flex items-center justify-center">
                             <a href="#" class="flex items-center gap-2 text-gray-800 dark:text-gray-300"
-                                wire:click.prevent="loadMore">
+                                wire:loading.remove wire:click.prevent="loadMore">
                                 Load more
                                 <svg class="size-4" viewBox="0 0 24 24" fill="none">
                                     <path d="M8 10L12 14L16 10" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                             </a>
+                            <div wire:loading class="w-full">
+                                <div class="flex items-center justify-center">
+                                    <x-spinner class="size-10" />
+                                </div>
+                            </div>
                         </div>
                     @endif
                 @endif
