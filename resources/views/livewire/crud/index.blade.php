@@ -1,7 +1,7 @@
 <div>
     @section('shortcust')
         <x-sidebar :items="[
-            'Shortcuts' => [
+            'Quick links' => [
                 'My apps' => 'app.applications.index',
                 // 'login' => 'auth.login',
             ],
@@ -77,16 +77,17 @@
                         </small>
                     </div>
                 @else
-                    <div class="w-full gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                    <div class="w-full gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                         @foreach ($this->items as $item)
-                            <x-entity-item name="{{ $item->name }}"
+                            <x-entity-item name="{{ $item->name }}" code="{{ $item->code }}"
                                 description="{{ 'Last updated at ' . $item->updated_at->format('M d, Y') }}" />
                         @endforeach
                     </div>
 
                     @if ($this->hasMorePages)
                         <div class="w-full py-10 flex items-center justify-center">
-                            <a href="#" class="flex items-center gap-2 text-gray-800 dark:text-gray-300"
+                            <a href="#"
+                                class="flex items-center gap-2 text-gray-700 cursor-pointer dark:text-gray-400 text-sm"
                                 wire:loading.remove wire:click.prevent="loadMore">
                                 Load more
                                 <svg class="size-4" viewBox="0 0 24 24" fill="none">

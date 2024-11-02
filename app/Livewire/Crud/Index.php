@@ -16,7 +16,7 @@ class Index extends Component
     public $model;
     public Collection $items;
     public $total = null;
-    public $limit = 3;
+    public $limit = 12;
     public $hasMorePages = false;
     public $search = "";
     public $sortBy = "updated_at";
