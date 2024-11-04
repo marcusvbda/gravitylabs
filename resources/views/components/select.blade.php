@@ -18,9 +18,6 @@
         {{ $slot }}
     </select>
     <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-        <svg class="size-5" viewBox="0 0 24 24" fill="none">
-            <path d="M5 9L12 16L19 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" />
-        </svg>
+        <x-icons.arrow-down class="size-5" />
     </div>
 </div>
