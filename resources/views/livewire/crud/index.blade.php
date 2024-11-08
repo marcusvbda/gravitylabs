@@ -1,4 +1,4 @@
-<div>
+<div wire:init="loadList" x-data="crud">
     @section('shortcust')
         <x-sidebar :items="[
             'Quick links' => [
@@ -12,9 +12,15 @@
         class="text-3xl flex items-center gap-2 text-gray-800 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-6">
         {!! Blade::render("<x-$this->icon />") !!}
         {!! $this->title !!}
-        <x-button class="ml-auto">
+        <x-button class="ml-auto" x-on:click="createModalVisible = true">
             {!! $this->createBtnText !!}
         </x-button>
+        <x-modal var="createModalVisible" class="pt-10">
+            <x-card x-on:click.outside="createModalVisible = false" size="w-full md:w-6/12">
+                content here
+            </x-card>
+        </x-modal>
+
     </h4>
 
     <div class="text-lg flex items-center gap-2 text-gray-800 dark:text-white mt-6">
@@ -47,7 +53,7 @@
         </x-select>
     </div>
 
-    <div class="w-full py-8" wire:init="loadList">
+    <div class="w-full py-8">
         @if ($this->total === null)
             <div wire:loading class="w-full pt-8">
                 <div class="flex items-center justify-center">
@@ -95,3 +101,10 @@
         </div>
     </div>
 </div>
+@script
+    <script>
+        Alpine.data('crud', () => ({
+            createModalVisible: false
+        }))
+    </script>
+@endscript
