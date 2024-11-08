@@ -7,7 +7,7 @@
                 <img class="w-8 h-8 mr-2" src="{{ config('app.logo') }}" alt="logo">
                 {{ config('app.name') }}
             </div>
-            <x-card>
+            <x-card class="w-full md:w-5/12">
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     @yield('description')
                 </h1>

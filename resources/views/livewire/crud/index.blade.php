@@ -15,12 +15,20 @@
         <x-button class="ml-auto" x-on:click="createModalVisible = true">
             {!! $this->createBtnText !!}
         </x-button>
-        <x-modal var="createModalVisible" class="pt-10">
-            <x-card x-on:click.outside="createModalVisible = false" size="w-full md:w-6/12">
+        <x-modal x-show="createModalVisible" class="px-4 pt-10">
+            <x-card x-cloak x-on:click.outside="createModalVisible = false" size="w-full md:w-1/2" {{-- x-show="createModalVisible"
+                x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="transform translate-x-full opacity-0"
+                x-transition:enter-end="transform -translate-x-0 opacity-100"
+                x-transition:leave="transition ease-in duration-100"
+                x-transition:leave-start="transform -translate-x-0 opacity-100"
+                x-transition:leave-end="transform translate-x-full opacity-0" --}}>
                 content here
+                <x-button class="ml-auto" x-on:click="createModalVisible = false">
+                    Fechar
+                </x-button>
             </x-card>
         </x-modal>
-
     </h4>
 
     <div class="text-lg flex items-center gap-2 text-gray-800 dark:text-white mt-6">
