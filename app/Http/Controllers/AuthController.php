@@ -8,8 +8,11 @@ use Auth;
 
 class AuthController extends Controller
 {
-    public function login(): View
+    public function login(): View|RedirectResponse
     {
+        if (Auth::check()) {
+            return redirect(route('app.dashboard'));
+        }
         return view('auth.login');
     }
 

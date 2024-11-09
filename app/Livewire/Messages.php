@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Illuminate\Contracts\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -17,7 +18,7 @@ class Messages extends Component
         'warning' => 'text-yellow-800 bg-yellow-50 dark:text-yellow-300',
     ];
 
-    public function mount()
+    public function mount(): void
     {
         // to add session messages
         // session()->flash('messages', [[
@@ -33,20 +34,20 @@ class Messages extends Component
     }
 
     #[On('onNewMessage')]
-    public function onNewMessageHanlder($data)
+    public function onNewMessageHanlder($data): void
     {
         $uid = uniqid();
         $this->messages[] = ["uid" => $uid, ...$data];
         $this->dispatch("removeIn5Seconds", $uid);
     }
 
-    public function removeMessage($id)
+    public function removeMessage($id): void
     {
         $this->messages = array_filter($this->messages, fn($message) => $message["uid"] !== $id);
     }
 
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.messages');
     }

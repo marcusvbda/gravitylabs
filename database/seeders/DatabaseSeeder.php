@@ -16,14 +16,14 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        // User::factory()->create([
-        //     'name' => 'root',
-        //     'email' => 'root@root.com',
-        //     'password' => bcrypt('roottoor'),
-        //     'email_verified_at' => now(),
-        //     'settings' => ['theme' => 'light'],
-        // ]);
+        User::factory()->create([
+            'name' => 'root',
+            'email' => 'root@root.com',
+            'password' => bcrypt('roottoor'),
+            'email_verified_at' => now(),
+            'settings' => ['theme' => 'light'],
+        ]);
 
-        Application::factory(20000)->create();
+        Application::factory(15)->create();
     }
 }

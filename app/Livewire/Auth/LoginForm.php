@@ -5,6 +5,8 @@ namespace App\Livewire\Auth;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 use Auth;
+use Illuminate\Contracts\View\View;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class LoginForm extends Component
 {
@@ -13,12 +15,12 @@ class LoginForm extends Component
     public $remember = true;
     public $redirectTo;
 
-    public function mount()
+    public function mount(): void
     {
         $this->redirectTo = request()?->redirectTo ?? route('app.applications.index');
     }
 
-    public function submit()
+    public function submit(): mixed
     {
         $validator = Validator::make([
             'email' => $this->email,
@@ -48,7 +50,7 @@ class LoginForm extends Component
         return redirect($this->redirectTo);
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.auth.login-form');
     }

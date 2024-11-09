@@ -5,6 +5,7 @@ namespace App\Traits;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Auth;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 trait BelongsToUser
 {
@@ -23,7 +24,7 @@ trait BelongsToUser
         });
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

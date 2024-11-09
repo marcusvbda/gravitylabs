@@ -4,6 +4,7 @@ namespace App\Livewire\Template;
 
 use Livewire\Component;
 use Auth;
+use Illuminate\Contracts\View\View;
 
 class ThemeSwitcher extends Component
 {
@@ -13,7 +14,7 @@ class ThemeSwitcher extends Component
         $this->theme = Auth::user()->settings?->theme ?? config('app.default_theme');
     }
 
-    public function toggleTheme()
+    public function toggleTheme(): void
     {
         $this->theme = $this->theme == 'light' ? 'dark' : 'light';
         $user = Auth::user();
@@ -24,7 +25,7 @@ class ThemeSwitcher extends Component
         $this->dispatch('theme-changed', $this->theme);
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.template.theme-switcher');
     }
