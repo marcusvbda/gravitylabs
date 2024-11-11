@@ -2,7 +2,6 @@
 
 @section('body')
     <x-navbar :items="[
-        'Dashboard' => 'app.dashboard',
         'My apps' => 'app.applications.index',
     ]" />
     <div class="flex flex-col md:flex-row">
