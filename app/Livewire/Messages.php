@@ -18,23 +18,8 @@ class Messages extends Component
         'warning' => 'text-yellow-800 bg-yellow-50 dark:text-yellow-300',
     ];
 
-    public function mount(): void
-    {
-        // to add session messages
-        // session()->flash('messages', [[
-        //     'type' => 'success',
-        //     'text' => 'Your action was successful!',
-        // ]]);
-        if (session()->has('messages')) {
-            foreach (session()->get('messages') as $message) {
-                $this->onNewMessageHanlder($message);
-            }
-            session()->forget('messages');
-        }
-    }
-
     #[On('onNewMessage')]
-    public function onNewMessageHanlder($data): void
+    public function onNewMessageHandler($data): void
     {
         $uid = uniqid();
         $this->messages[] = ["uid" => $uid, ...$data];

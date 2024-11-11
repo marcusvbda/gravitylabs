@@ -8,8 +8,8 @@
                 <ul class="pb-1 list-unstyled fw-normal small flex gap-6 md:gap-0 flex-row md:flex-col pr-4">
                     @foreach ($rows as $itemKey => $itemValue)
                         <li>
-                            <a href="{{ route($itemValue) }}"
-                                class="duration-200 relative flex items-center flex-wrap font-medium hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white {{ request()->routeIs($itemValue) ? '!text-primary-600' : '' }}">
+                            <a href="{{ route($itemValue) }}" style="color : var(--theme-color)"
+                                class="duration-200 relative flex items-center flex-wrap font-medium hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white">
                                 {{ $itemKey }}
                             </a>
                         </li>

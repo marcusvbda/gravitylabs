@@ -23,7 +23,5 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'settings' => ['theme' => 'light'],
         ]);
-
-        Application::factory(15)->create();
     }
 }

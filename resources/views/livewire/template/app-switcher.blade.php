@@ -5,7 +5,11 @@
                 <div wire:init="loadList"
                     class="rounded-md bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-white px-3 py-2 text-sm font-medium flex items-center gap-2"
                     aria-current="page">
-                    {{ $selectedApp->name }}
+                    <div class="flex items-center gap-2">
+                        <div class="size-3 rounded-full" style="background-color: {{ $selectedApp->primary_color }}">
+                        </div>
+                        {{ $selectedApp->name }}
+                    </div>
                     <div class="ml-2" wire:loading>
                         <x-spinner class="size-4" />
                     </div>
@@ -19,7 +23,13 @@
                             <a href="#" wire:click.prevent="selectApp({{ $item->id }})"
                                 class="flex px-4 py-2 text-sm text-gray-400 cursor-pointer dark:text-gray-500 items-center justify-between gap-2 hover:text-gray-900 dark:hover:text-white transition duration-300"
                                 role="menuitem" tabindex="-1">
-                                {{ $item->name }} <x-icons.arrow-down class="size-3 -rotate-90" />
+                                <div class="flex items-center gap-2">
+                                    <div class="size-3 rounded-full"
+                                        style="background-color: {{ $item->primary_color }}">
+                                    </div>
+                                    {{ $item->name }}
+                                </div>
+                                <x-icons.arrow-down class="size-3 -rotate-90" />
                             </a>
                         @endforeach
                         @if ($this->hasMorePages)

@@ -1,16 +1,12 @@
 @php
-    $colors = [
-        'primary' =>
-            'text-white bg-primary-600 hover:bg-primary-700 focus:ring-primary-300  dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:hover:bg-primary-600',
-    ];
     $customClass = data_get($attributes, 'class', '');
-    $colorClass = data_get($colors, data_get($attributes, 'color', 'primary'));
-    $class = "disabled:opacity-25 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center $customClass $colorClass";
+    $class = "disabled:opacity-25 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white transition duration-200 hover:brightness-95 disabled:opacity-25 $customClass";
     $wireClick = data_get($attributes, 'wire:click', '');
     $xoOnClick = data_get($attributes, 'x-on:click', '');
 @endphp
 
 <button type="{{ $type ?? 'button' }}" @if (@$type == 'submit') wire:loading.attr="disabled" @endif
+    style="background-color: var(--theme-color)"
     @if ($wireClick) wire:click="{{ $wireClick }}" @endif class="{{ $class }}"
     @if ($xoOnClick) x-on:click="{{ $xoOnClick }}" @endif>
     <div class="flex justify-center items-center gap-2">

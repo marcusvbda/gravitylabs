@@ -21,6 +21,8 @@ class Index extends Component
     public $hasMorePages = false;
     public $search = "";
     public $sortBy = "updated_at";
+    public $newAppName = "";
+    public $newAppPrimaryColor = "#01309B";
 
 
     public function updated($field): void
@@ -51,6 +53,24 @@ class Index extends Component
     public function loadMore(): void
     {
         $this->loadList($this->items->count());
+    }
+
+    public function create(): void
+    {
+        app()->make($this->model)->create([
+            "name" => $this->newAppName,
+            "primary_color" => $this->newAppPrimaryColor
+        ]);
+        $this->dispatch("closeCreateModal");
+        $this->sortBy = "created_at";
+        $this->search = "";
+        $this->loadList();
+        $this->dispatch('onNewMessage', [
+            'type' => 'success',
+            'text' => 'Successfully created ' . $this->newAppName
+        ]);
+        $this->newAppName = "";
+        $this->newAppPrimaryColor = "#235edf";
     }
 
     public function render(): View

@@ -1,4 +1,4 @@
-<div>
+<div class="flex flex-col items-start {{ $class ?? '' }}">
     @if (@$label)
         <label for="email" class="block text-sm font-medium text-gray-900 dark:text-white">
             {{ $label }}

@@ -24,6 +24,7 @@ class AppSwitcher extends Component
         $found = $selected ? Application::findOrFail($selected) : null;
         if (!$found) {
             $first = Application::orderBy("name", 'asc')->first();
+            if (!$first) return;
             $this->selectApp($first->id, false);
             $found = $first;
         }

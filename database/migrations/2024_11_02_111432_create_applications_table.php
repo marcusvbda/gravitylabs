@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->onDelete('cascade');
             $table->string('name');
+            $table->string('primary_color');
             $table->jsonb('data')->nullable();
             $table->timestamps();
         });

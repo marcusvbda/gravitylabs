@@ -14,15 +14,30 @@
         <x-button class="ml-auto" x-on:click="createModalVisible = true">
             {!! $this->createBtnText !!}
         </x-button>
-        <x-modal x-show="createModalVisible" class="px-4 pt-10">
-            <x-card x-cloak x-on:click.outside="createModalVisible = false" class="w-full md:w-1/2">
-                content here
-                <x-button class="ml-auto" x-on:click="createModalVisible = false">
-                    Fechar
-                </x-button>
-            </x-card>
-        </x-modal>
     </h4>
+
+    <x-modal x-show="createModalVisible" class="px-4 pt-10">
+        <x-card x-cloak x-on:click.outside="createModalVisible = false" class="w-full md:w-1/2">
+            <form class="flex flex-col gap-2 items-start" wire:submit.prevent="create">
+                <h1
+                    class="text-left w-full flex justify-between font-semibold items-center text-2xl text-gray-800 dark:text-white">
+                    Create a new
+                    {{ $this->label }}
+                    <a href="#" x-on:click="createModalVisible = false" class="group cursor-pointer">
+                        <x-icons.close class="size-6 opacity-50 transition-all duration-300 group-hover:opacity-100" />
+                    </a>
+                </h1>
+                <div class="w-full flex flex-col gap-5 my-8">
+                    <x-input class="w-full" label="Name your {{ $this->label }}" required model="newAppName" />
+                    <x-input class="w-full" type="color" inputClass="h-10 py-1" label="Primary color" required
+                        model="newAppPrimaryColor" />
+                </div>
+                <x-button type="submit">
+                    Get started
+                </x-button>
+            </form>
+        </x-card>
+    </x-modal>
 
     <div class="text-lg flex items-center gap-2 text-gray-800 dark:text-white mt-6">
         @if (isset($this->items))
@@ -78,6 +93,7 @@
                     <div class="w-full gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                         @foreach ($this->items as $item)
                             <x-entity-item name="{{ $item->name }}" code="{{ $item->code }}"
+                                color="{{ $item->primary_color }}"
                                 description="{{ 'Last updated at ' . $item->updated_at->format('M d, Y') }}" />
                         @endforeach
                     </div>
@@ -105,7 +121,12 @@
 @script
     <script>
         Alpine.data('crud', () => ({
-            createModalVisible: false
+            createModalVisible: false,
+            init() {
+                Livewire.on('closeCreateModal', () => {
+                    this.createModalVisible = false
+                })
+            }
         }))
     </script>
 @endscript

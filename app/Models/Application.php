@@ -12,7 +12,7 @@ class Application extends Model
     use BelongsToUser, HasFactory, HasCode;
 
     protected $table = 'applications';
-    protected $fillable = ['name', 'data'];
+    protected $fillable = ['name', 'primary_color', 'data'];
     public $casts = [
         'data' => 'object'
     ];
