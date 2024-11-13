@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Crud;
 
+use App\Models\Application;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-
-class Index extends Component
+#[Layout('layouts.application')]
+class CrudPage extends Component
 {
     public $icon;
     public $label;
@@ -21,9 +23,11 @@ class Index extends Component
     public $hasMorePages = false;
     public $search = "";
     public $sortBy = "updated_at";
-    public $newAppName = "";
-    public $newAppPrimaryColor = "#01309B";
 
+    public function __construct()
+    {
+        $this->model = Application::class;
+    }
 
     public function updated($field): void
     {
@@ -55,23 +59,31 @@ class Index extends Component
         $this->loadList($this->items->count());
     }
 
+    public function createPayload(): array
+    {
+        return [];
+    }
+
+    public function onCreated(): void
+    {
+        // 
+    }
+
+
     public function create(): void
     {
-        app()->make($this->model)->create([
-            "name" => $this->newAppName,
-            "primary_color" => $this->newAppPrimaryColor
-        ]);
+        app()->make($this->model)->create($this->createPayload());
         $this->dispatch("closeCreateModal");
         $this->sortBy = "created_at";
         $this->search = "";
         $this->loadList();
         $this->dispatch('onNewMessage', [
             'type' => 'success',
-            'text' => 'Successfully created ' . $this->newAppName
+            'text' => $this->label . 'successfully created !'
         ]);
-        $this->newAppName = "";
-        $this->newAppPrimaryColor = "#235edf";
+        $this->onCreated();
     }
+
 
     public function render(): View
     {

@@ -1,4 +1,5 @@
-@extends('templates.default')
+@extends('layouts.default')
+@section('title', $title)
 
 @section('body')
     <section class="bg-gray-50 dark:bg-gray-900">
@@ -7,13 +8,7 @@
                 <img class="w-8 h-8 mr-2" src="{{ config('app.logo') }}" alt="logo">
                 {{ config('app.name') }}
             </div>
-            <x-card class="w-full md:w-5/12">
-                <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                    @yield('description')
-                </h1>
-                <livewire:messages />
-                @yield('content')
-            </x-card>
+            {{ $slot }}
         </div>
     </section>
 @endsection

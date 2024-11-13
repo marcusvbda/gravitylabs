@@ -22,13 +22,14 @@
                 <h1
                     class="text-left w-full flex justify-between font-semibold items-center text-2xl text-gray-800 dark:text-white">
                     Create a new
-                    {{ $this->label }}
+                    {{ strtolower($this->label) }}
                     <a href="#" x-on:click="createModalVisible = false" class="group cursor-pointer">
                         <x-icons.close class="size-6 opacity-50 transition-all duration-300 group-hover:opacity-100" />
                     </a>
                 </h1>
                 <div class="w-full flex flex-col gap-5 my-8">
-                    <x-input class="w-full" label="Name your {{ $this->label }}" required model="newAppName" />
+                    <x-input class="w-full" label="Name your {{ strtolower($this->label) }}" required
+                        model="newAppName" />
                     <x-input class="w-full" type="color" inputClass="h-10 py-1" label="Primary color" required
                         model="newAppPrimaryColor" />
                 </div>
@@ -44,9 +45,9 @@
             @php
                 $qty = $this->total;
             @endphp
-            {{ $qty }} {{ $qty === 0 ? $this->plural : ($qty > 1 ? $this->plural : $this->label) }}
+            {{ $qty }} {{ strtolower($qty === 0 ? $this->plural : ($qty > 1 ? $this->plural : $this->label)) }}
         @else
-            Loading ...
+            <x-spinner class="size-6" />
         @endif
     </div>
 

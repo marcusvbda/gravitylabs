@@ -1,4 +1,6 @@
-@extends('templates.default')
+@extends('layouts.default')
+@section('theme', Auth::user()->settings?->theme ?? config('app.default_theme'))
+@section('title', $title)
 
 @section('body')
     <x-navbar :items="[
@@ -15,7 +17,7 @@
 md:w-10/12
 @endif  bg-gray-100 dark:bg-gray-900 py-8 md:py-10 px-4 md:px-6 min-h-screen">
             <livewire:messages />
-            @yield('content')
+            {{ $slot }}
         </div>
     </div>
     <x-footer />

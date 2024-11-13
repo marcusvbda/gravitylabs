@@ -4,11 +4,15 @@ namespace App\Livewire\Auth;
 
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
-use Auth;
 use Illuminate\Contracts\View\View;
-use Livewire\Features\SupportRedirects\Redirector;
+use Livewire\Attributes\{Layout, Title};
+use Auth;
 
-class LoginForm extends Component
+
+#[Layout('layouts.auth')]
+#[Title('Login')]
+
+class LoginPage extends Component
 {
     public $email = 'root@root.com';
     public $password = 'roottoor';
@@ -52,6 +56,8 @@ class LoginForm extends Component
 
     public function render(): View
     {
-        return view('livewire.auth.login-form');
+        return view('livewire.auth.login-page')->with([
+            'description' => 'Sign in to your account'
+        ]);
     }
 }
