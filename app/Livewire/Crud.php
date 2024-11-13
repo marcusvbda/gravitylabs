@@ -23,8 +23,13 @@ class Crud extends PaginatedList
     public $editForm = '';
     public $createView = "livewire.crud.createView";
     public $sortBy = "updated_at";
-    public $editingId = null;
-    public $name = "";
+    public $formCreate = [
+        'name' => '',
+    ];
+    public $formEdit = [
+        'id' => '',
+        'name' => '',
+    ];
 
     public function updated($field): void
     {
@@ -48,12 +53,14 @@ class Crud extends PaginatedList
 
     public function createPayload(): array
     {
-        return [];
+        return [
+            "name" => $this->formCreate['name'],
+        ];
     }
 
     public function onCreated($created): void
     {
-        // 
+        $this->formCreate["name"] = "";
     }
 
     public function create(): void
@@ -74,30 +81,44 @@ class Crud extends PaginatedList
     {
         $label = strtolower($this->label);
         return <<<BLADE
-            <x-input class="w-full" label="Name your $label" required model="name" />
+            <x-input class="w-full" label="Name your $label" required model="formCreate.name" />
         BLADE;
     }
 
-    public function makeEditForm($entity): string
+    public function makeEditForm($entity, $iconColor = 'var(--theme-color)', $append = ''): string
     {
-        $this->name = $entity->name;
+        $this->formEdit['name'] = $entity->name;
         $id = $entity->id;
+        $letter = strtoupper(substr($entity->name, 0, 1));
+
         return <<<BLADE
-            <x-inline-edit index="name" entityId="$id">
-                <x-slot name="source">
-                    <h1 class="text-2xl w-full font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                        $this->name
-                    </h1>
-                </x-slot>
-                <x-input class="w-full" required model="name" />
-            </x-inline-edit>
+            <div class="w-full flex flex-col gap-4" style="--modal-item-default-color: $iconColor">
+                <div class="flex items-start justify-between mb-8">
+                    <div class="size-24 min-w-24 rounded-xl flex items-center justify-center text-white text-5xl font-bold"
+                            style="background-color: var(--modal-item-default-color)">
+                            $letter 
+                    </div>
+                    <a href="#" x-on:click="editModalVisible = false" class="group cursor-pointer">
+                        <x-icons.close class="size-10 opacity-50 transition-all duration-300 group-hover:opacity-100" />
+                    </a>
+                </div>
+                <x-inline-edit index="name" entityId="$id">
+                    <x-slot name="source">
+                        <h1 class="text-2xl text-left w-full font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                            $entity->name
+                        </h1>
+                    </x-slot>
+                    <x-input class="w-full" required model="formEdit.name" />
+                </x-inline-edit>
+                $append
+            </div>
         BLADE;
     }
 
     public function onSaveInline($index, $entityId): void
     {
         $entity = app()->make($this->model)->findOrFail($entityId);
-        $entity->{$index} = $this->name;
+        $entity->{$index} = $this->formEdit[$index];
         $entity->save();
         $this->editForm = $this->makeEditForm($entity);
         $this->dispatch('refreshCrudItem', $this->model, $entityId);
@@ -113,6 +134,6 @@ class Crud extends PaginatedList
     public function openEditModal($id)
     {
         $this->editForm = $this->makeEditForm(app()->make($this->model)->findOrFail($id));
-        $this->editingId = $id;
+        $this->formEdit['id'] = $id;
     }
 }

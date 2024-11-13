@@ -17,7 +17,6 @@
         </x-button>
     </h4>
 
-    @include('livewire/crud/modalCreate')
     @include('livewire/crud/headerFilter')
 
     <div class="w-full py-8">
@@ -29,6 +28,7 @@
             </div>
         @endif
         @include('livewire/crud/listItems')
+        @include('livewire/crud/modalCreate')
     </div>
 </div>
 @script

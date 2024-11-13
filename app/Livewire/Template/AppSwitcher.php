@@ -46,6 +46,12 @@ class AppSwitcher extends PaginatedList
         $this->js("Livewire.navigate(window.location.href);");
     }
 
+    #[On('loadAppsList')]
+    public function loadAppsList($id = null): void
+    {
+        $this->loadList();
+    }
+
     public function render(): View
     {
         return view('livewire.template.app-switcher');
