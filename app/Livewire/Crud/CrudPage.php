@@ -2,14 +2,12 @@
 
 namespace App\Livewire\Crud;
 
-use App\Models\Application;
+use App\Livewire\PaginatedList;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
 use Livewire\Attributes\Layout;
-use Livewire\Component;
 
 #[Layout('layouts.application')]
-class CrudPage extends Component
+class CrudPage extends PaginatedList
 {
     public $icon;
     public $label;
@@ -17,17 +15,9 @@ class CrudPage extends Component
     public $title;
     public $createBtnText;
     public $model;
-    public Collection $items;
-    public $total = null;
     public $limit = 12;
-    public $hasMorePages = false;
     public $search = "";
     public $sortBy = "updated_at";
-
-    public function __construct()
-    {
-        $this->model = Application::class;
-    }
 
     public function updated($field): void
     {
@@ -42,21 +32,11 @@ class CrudPage extends Component
         $this->loadList();
     }
 
-    public function loadList($skip = 0): void
+    public function makeQuery(): mixed
     {
-        $query = app()->make($this->model)
+        return app()->make($this->model)
             ->where('name', 'like', "%{$this->search}%")
             ->orderBy($this->sortBy, $this->sortBy === "name" ? 'asc' : 'desc');
-
-        $this->total = $query->count();
-        $query = $query->take($this->limit)->skip($skip);
-        $this->items = !$skip ?  $query->get() : $this->items->toBase()->merge($query->get());
-        $this->hasMorePages = $this->items->count() < $this->total;
-    }
-
-    public function loadMore(): void
-    {
-        $this->loadList($this->items->count());
     }
 
     public function createPayload(): array
@@ -68,7 +48,6 @@ class CrudPage extends Component
     {
         // 
     }
-
 
     public function create(): void
     {

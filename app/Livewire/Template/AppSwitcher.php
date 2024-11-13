@@ -2,18 +2,14 @@
 
 namespace App\Livewire\Template;
 
+use App\Livewire\PaginatedList;
 use App\Models\Application;
-use Livewire\Component;
-use Illuminate\Support\Collection;
 use Auth;
 use Illuminate\Contracts\View\View;
 
-class AppSwitcher extends Component
+class AppSwitcher extends PaginatedList
 {
-    public Collection $items;
     public $limit = 5;
-    public $total = null;
-    public $hasMorePages = false;
     public $selectedApp = null;
     public $user = null;
 
@@ -31,18 +27,9 @@ class AppSwitcher extends Component
         $this->selectedApp = $found;
     }
 
-    public function loadList($skip = 0): void
+    public function makeQuery(): mixed
     {
-        $query = Application::where("id", "!=", $this->user->settings->selected_app)->orderBy("name", 'asc');
-        $this->total = $query->count();
-        $query = $query->take($this->limit)->skip($skip);
-        $this->items = !$skip ?  $query->get() : $this->items->toBase()->merge($query->get());
-        $this->hasMorePages = $this->items->count() < $this->total;
-    }
-
-    public function loadMore(): void
-    {
-        $this->loadList($this->items->count());
+        return Application::where("id", "!=", $this->user->settings->selected_app)->orderBy("name", 'asc');
     }
 
     public function selectApp($id, $reload = true): void
