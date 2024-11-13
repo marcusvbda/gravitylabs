@@ -3,9 +3,11 @@
 namespace App\Livewire\Template;
 
 use App\Livewire\PaginatedList;
-use App\Models\Application;
+use App\Models\MyApp;
 use Auth;
 use Illuminate\Contracts\View\View;
+use Livewire\Attributes\On;
+
 
 class AppSwitcher extends PaginatedList
 {
@@ -13,13 +15,13 @@ class AppSwitcher extends PaginatedList
     public $selectedApp = null;
     public $user = null;
 
-    public function __construct()
+    public function mount(): void
     {
         $this->user = Auth::user();
         $selected = @$this->user->settings->selected_app;
-        $found = $selected ? Application::findOrFail($selected) : null;
+        $found = $selected ? MyApp::findOrFail($selected) : null;
         if (!$found) {
-            $first = Application::orderBy("name", 'asc')->first();
+            $first = MyApp::orderBy("name", 'asc')->first();
             if (!$first) return;
             $this->selectApp($first->id);
             $found = $first;
@@ -29,16 +31,18 @@ class AppSwitcher extends PaginatedList
 
     public function makeQuery(): mixed
     {
-        return Application::where("id", "!=", $this->user->settings->selected_app)->orderBy("name", 'asc');
+        return MyApp::where("id", "!=", $this->user->settings->selected_app)->orderBy("name", 'asc');
     }
 
-    public function selectApp($id): void
+    #[On('selectApp')]
+    public function selectApp($id, $loadList = false): void
     {
         $settings = $this->user->settings;
         $settings->selected_app = $id;
         $this->user->settings = $settings;
         $this->user->save();
-        $this->selectedApp = $this->items->find($id);
+        $this->selectedApp = MyApp::findOrFail($id);
+        if ($loadList) $this->loadList();
         $this->js("Livewire.navigate(window.location.href);");
     }
 

@@ -4,7 +4,6 @@ namespace App\Livewire\Template;
 
 use Livewire\Component;
 use Auth;
-use Illuminate\Contracts\View\View;
 
 class ThemeSwitcher extends Component
 {

@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Livewire\Crud;
+namespace App\Livewire\Application;
 
-use App\Models\Application;
+use App\Livewire\Crud;
+use App\Models\MyApp;
 use Livewire\Attributes\Title;
 
 #[Title('My apps')]
-class ApplicationsPage extends CrudPage
+class MyApps extends Crud
 {
     public $icon = 'icons.apps';
     public $label = "App";
     public $plural = "Apps";
     public $title = "My apps";
     public $createBtnText = 'Create an app';
-    public $model = Application::class;
+    public $model = MyApp::class;
     public $newAppPrimaryColor = "#01309B";
     public $newAppName = "";
 
@@ -25,9 +26,14 @@ class ApplicationsPage extends CrudPage
         ];
     }
 
-    public function onCreated(): void
+    public function onCreated($created): void
     {
         $this->newAppName = "";
         $this->newAppPrimaryColor = "#235edf";
+        if (MyApp::count() === 1) {
+            $this->dispatch("selectApp", $created->id, loadList: true);
+        } else {
+            $this->dispatch("loadList");
+        }
     }
 }

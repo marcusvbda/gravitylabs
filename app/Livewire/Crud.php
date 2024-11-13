@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Livewire\Crud;
+namespace App\Livewire;
 
 use App\Livewire\PaginatedList;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Layout;
 
 #[Layout('layouts.application')]
-class CrudPage extends PaginatedList
+class Crud extends PaginatedList
 {
     public $icon;
     public $label;
@@ -44,14 +44,14 @@ class CrudPage extends PaginatedList
         return [];
     }
 
-    public function onCreated(): void
+    public function onCreated($created): void
     {
         // 
     }
 
     public function create(): void
     {
-        app()->make($this->model)->create($this->createPayload());
+        $created = app()->make($this->model)->create($this->createPayload());
         $this->dispatch("closeCreateModal");
         $this->sortBy = "created_at";
         $this->search = "";
@@ -60,7 +60,7 @@ class CrudPage extends PaginatedList
             'type' => 'success',
             'text' => $this->label . 'successfully created !'
         ]);
-        $this->onCreated();
+        $this->onCreated($created);
     }
 
 
