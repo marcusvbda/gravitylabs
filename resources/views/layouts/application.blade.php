@@ -17,9 +17,13 @@
             class="w-full @hasSection('name')
 md:w-10/12
 @endif  bg-gray-100 dark:bg-gray-900 py-8 md:py-10 px-4 md:px-6 min-h-screen">
-            <livewire:messages />
+            @persist('messages')
+                <livewire:messages />
+            @endpersist
             {{ $slot }}
         </div>
     </div>
-    <x-footer />
+    @persist('footer')
+        <x-footer />
+    @endpersist
 @endsection

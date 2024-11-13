@@ -25,7 +25,7 @@ class ThemeSwitcher extends Component
         $this->dispatch('theme-changed', $this->theme);
     }
 
-    public function render(): View
+    public function render(): mixed
     {
         return view('livewire.template.theme-switcher');
     }

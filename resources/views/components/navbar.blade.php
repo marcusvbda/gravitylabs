@@ -63,7 +63,7 @@
         x-transition>
         <div class="space-y-1 px-2 pb-3 pt-2">
             @foreach ($items as $key => $value)
-                <a href="{{ route($value) }}"
+                <a href="{{ route($value) }}" wire:navigate
                     class="{{ !request()->routeIs($value) ? 'bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white' : 'text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white' }} block rounded-md px-3 py-2 text-base font-medium text-gray-300"
                     aria-current="page">
                     {{ $key }}
