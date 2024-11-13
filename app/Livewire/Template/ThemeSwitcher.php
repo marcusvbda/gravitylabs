@@ -9,7 +9,7 @@ use Illuminate\Contracts\View\View;
 class ThemeSwitcher extends Component
 {
     public $theme;
-    public function __construct()
+    public function mount(): void
     {
         $this->theme = Auth::user()->settings?->theme ?? config('app.default_theme');
     }

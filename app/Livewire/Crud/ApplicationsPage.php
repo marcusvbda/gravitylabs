@@ -5,7 +5,7 @@ namespace App\Livewire\Crud;
 use App\Models\Application;
 use Livewire\Attributes\Title;
 
-#[Title('Login')]
+#[Title('My apps')]
 class ApplicationsPage extends CrudPage
 {
     public $icon = 'icons.apps';

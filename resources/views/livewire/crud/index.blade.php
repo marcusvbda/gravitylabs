@@ -3,6 +3,7 @@
         <x-sidebar :items="[
             'Quick links' => [
                 'Applications' => 'app.applications.index',
+                'Test' => 'app.test',
             ],
         ]" />
     @endsection

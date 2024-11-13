@@ -16,13 +16,14 @@
                 </button>
             </div>
             <div class="flex flex-1 items-center justify-start">
-                <a href="{{ route('app.applications.index') }}" class="flex flex-shrink-0 items-center cursor-pointer">
+                <a href="{{ route('app.applications.index') }}" class="flex flex-shrink-0 items-center cursor-pointer"
+                    wire:navigate>
                     <img class="h-8 w-auto" src="{{ config('app.logo') }}" alt="{{ config('app.name') }}}">
                 </a>
                 <div class="hidden sm:ml-6 sm:block">
                     <div class="flex space-x-4">
                         @foreach ($items as $key => $value)
-                            <a href="{{ route($value) }}"
+                            <a href="{{ route($value) }}" wire:navigate
                                 class="rounded-md {{ request()->routeIs($value) ? 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-white' : 'text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-800 dark:hover:text-white' }} px-3 py-2 text-sm font-medium "
                                 aria-current="page">
                                 {{ $key }}
@@ -32,8 +33,12 @@
                 </div>
             </div>
             <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                @livewire('template.theme-switcher')
-                @livewire('template.app-switcher', ['lazy' => true])
+                @persist('theme-switcher')
+                    <livewire:template.theme-switcher />
+                @endpersist
+                @persist('app-switcher')
+                    <livewire:template.app-switcher lazy />
+                @endpersist
                 <x-dropdown-menu class="ml-3">
                     <x-slot name="source">
                         <x-avatar size="8" />
@@ -45,7 +50,7 @@
                                 {{ Auth::user()->email }}
                             </strong>
                         </div>
-                        <a href="{{ route('auth.logout') }}"
+                        <a href="{{ route('auth.logout') }}" wire:navigate
                             class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200" role="menuitem"
                             tabindex="-1" id="user-menu-item-2">Sign out</a>
                     </x-slot>

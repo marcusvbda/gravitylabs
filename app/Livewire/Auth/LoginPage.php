@@ -51,7 +51,7 @@ class LoginPage extends Component
             ]);
         }
 
-        return redirect($this->redirectTo);
+        return $this->redirect($this->redirectTo, navigate: true);
     }
 
     public function render(): View

@@ -5,6 +5,7 @@
 @section('body')
     <x-navbar :items="[
         'My apps' => 'app.applications.index',
+        'Test' => 'app.test',
     ]" />
     <div class="flex flex-col md:flex-row">
         @hasSection('shortcust')

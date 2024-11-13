@@ -21,7 +21,7 @@ class AppSwitcher extends PaginatedList
         if (!$found) {
             $first = Application::orderBy("name", 'asc')->first();
             if (!$first) return;
-            $this->selectApp($first->id, false);
+            $this->selectApp($first->id);
             $found = $first;
         }
         $this->selectedApp = $found;
@@ -32,15 +32,14 @@ class AppSwitcher extends PaginatedList
         return Application::where("id", "!=", $this->user->settings->selected_app)->orderBy("name", 'asc');
     }
 
-    public function selectApp($id, $reload = true): void
+    public function selectApp($id): void
     {
         $settings = $this->user->settings;
         $settings->selected_app = $id;
         $this->user->settings = $settings;
         $this->user->save();
-        if ($reload) {
-            $this->js("window.location.reload();");
-        }
+        $this->selectedApp = $this->items->find($id);
+        $this->js("Livewire.navigate(window.location.href);");
     }
 
     public function render(): View
