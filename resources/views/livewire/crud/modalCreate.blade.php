@@ -10,9 +10,7 @@
                 </a>
             </h1>
             <div class="w-full flex flex-col gap-5 my-8">
-                <x-input class="w-full" label="Name your {{ strtolower($this->label) }}" required model="newAppName" />
-                <x-input class="w-full" type="color" inputClass="h-10 py-1" label="Primary color" required
-                    model="newAppPrimaryColor" />
+                {!! $this->createForm !!}
             </div>
             <x-button type="submit">
                 Get started

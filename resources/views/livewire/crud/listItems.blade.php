@@ -1,9 +1,9 @@
-<div class="flex flex-col">
+<div class="flex flex-col" x-data="{ editModalVisible: false }">
     @if ($this->total !== null)
         @if ($this->total <= 0)
             <div class="w-full text-gray-400" wire:loading.remove>
                 <h4 class="text-2xl font-semibold">
-                    No {{ $this->plural }} found
+                    No {{ strtolower($this->label) }} found
                 </h4>
                 <small class="text-xs">
                     Try broadening your filter or create a new one
@@ -12,7 +12,10 @@
         @else
             <div class="w-full gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 @foreach ($this->items as $item)
-                    @include('livewire/crud/entityItem')
+                    <div wire:click="openEditModal({{ $item->id }})" x-on:click="editModalVisible = true"
+                        wire:key="div_crud_item_component_{{ $item->id }}">
+                        <livewire:crud-item :item="$item" wire:key="crud_item_component_{{ $item->id }}" />
+                    </div>
                 @endforeach
             </div>
             @if ($this->hasMorePages)
@@ -30,6 +33,7 @@
                     </div>
                 </div>
             @endif
+            @include('livewire.crud.modalEdit')
         @endif
     @endif
 </div>

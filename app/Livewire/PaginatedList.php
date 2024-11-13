@@ -24,7 +24,6 @@ class PaginatedList extends Component
         return Model::query();
     }
 
-
     #[On('loadList')]
     public function loadList($skip = 0): void
     {
@@ -34,7 +33,6 @@ class PaginatedList extends Component
         $this->items = !$skip ?  $query->get() : $this->items->toBase()->merge($query->get());
         $this->hasMorePages = $this->items->count() < $this->total;
     }
-
 
     public function loadMore(): void
     {

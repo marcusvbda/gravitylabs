@@ -13,7 +13,7 @@
     @livewireStyles
 </head>
 
-<body style="--theme-color: @yield('theme-color', config('app.default_theme_color', '#01309B'))">
+<body style="--theme-color: @yield('theme-color', config('app.default_theme_color'))">
     @yield('body')
 </body>
 @livewireScripts
