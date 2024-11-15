@@ -8,7 +8,7 @@
         </div>
     </template>
     <template x-if="showing">
-        <div class="w-full" wire:click.away="onSaveInline('{{ $index }}', {{ $entityId }}); showing = false">
+        <div class="w-full" wire:click.away="onSaveInline('{{ $index }}'); showing = false">
             {{ $slot }}
         </div>
     </template>

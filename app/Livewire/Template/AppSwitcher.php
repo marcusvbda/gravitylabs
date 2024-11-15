@@ -19,13 +19,7 @@ class AppSwitcher extends PaginatedList
     {
         $this->user = Auth::user();
         $selected = @$this->user->settings->selected_app;
-        $found = $selected ? MyApp::findOrFail($selected) : null;
-        if (!$found) {
-            $first = MyApp::orderBy("name", 'asc')->first();
-            if (!$first) return;
-            $this->selectApp($first->id);
-            $found = $first;
-        }
+        $found = $selected ? MyApp::find($selected) : null;
         $this->selectedApp = $found;
     }
 
@@ -41,9 +35,8 @@ class AppSwitcher extends PaginatedList
         $settings->selected_app = $id;
         $this->user->settings = $settings;
         $this->user->save();
-        $this->selectedApp = MyApp::findOrFail($id);
+        $this->selectedApp = $id ? MyApp::findOrFail($id) : null;
         if ($loadList) $this->loadList();
-        $this->js("Livewire.navigate(window.location.href);");
     }
 
     #[On('loadAppsList')]

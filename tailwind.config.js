@@ -58,7 +58,7 @@ export default {
     ],
     safelist: [
         'size-8', 'size-3',
-        'text-green-800', 'text-blue-800', 'text-red-800', 'text-yellow-800',
+        'text-green-800', 'text-blue-800', 'text-red-800', 'text-yellow-800', 'text-red-600',
         'dark:text-green-400', 'dark:text-blue-400', 'dark:text-red-400', 'dark:text-yellow-300',
         'border-green-300', 'dark:border-green-800',
         'bg-green-50', 'bg-blue-50', 'bg-red-50', 'bg-yellow-50',

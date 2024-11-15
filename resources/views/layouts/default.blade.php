@@ -19,3 +19,36 @@
 @livewireScripts
 
 </html>
+
+<script>
+    document.addEventListener('livewire:init', () => {
+        const showMessages = (messages) => {
+            const colors = {
+                'success': '#65a30d',
+                'error': '#e11d48',
+                'warning': '#d97706',
+            };
+            messages.forEach((message) => {
+                Toastify({
+                    text: message.text,
+                    duration: 5000,
+                    close: true,
+                    position: "right",
+                    stopOnFocus: true,
+                    style: {
+                        background: colors[message.type],
+                    }
+                }).showToast();
+            });
+        }
+
+        @if (session('messages'))
+            let sessionMessages = @json(session('messages'));
+            showMessages(sessionMessages);
+        @endif
+
+        let cleanup = Livewire.on('sendMessage', (data) => {
+            showMessages(data);
+        });
+    });
+</script>

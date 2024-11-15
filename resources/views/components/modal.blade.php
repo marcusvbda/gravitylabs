@@ -1,9 +1,15 @@
 @php
     $class = 'flex justify-center min-h-screen text-center ' . data_get($attributes, 'class', '');
     $xShow = data_get($attributes, 'x-show', '');
+    $events = data_get($attributes, 'events');
+    $eventRender = '';
+    foreach ($events ?? [] as $key => $value) {
+        $eventRender .= "x-on:$key='$value' ";
+    }
+
 @endphp
 
-<div x-cloak x-show="{{ $xShow }}"
+<div x-cloak x-show="{{ $xShow }}" {!! $eventRender !!}
     :class="{ 'fixed inset-0 z-50 overflow-y-auto overflow-x-hidden': true, 'lock-scroll': {{ $xShow }} }"
     aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <div class=" {{ $class }}">

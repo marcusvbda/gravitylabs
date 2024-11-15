@@ -2,7 +2,6 @@
     <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
         {{ $description }}
     </h1>
-    <livewire:messages />
     <form class="space-y-4 md:space-y-6" wire:submit="submit">
         @section('description', $description)
         <x-input label="Your Email" type="email" required placeholder="name@company.com" model="email" />

@@ -5,6 +5,7 @@ namespace App\Livewire\Application;
 use App\Livewire\Crud;
 use App\Models\MyApp;
 use Livewire\Attributes\Title;
+use Auth;
 
 #[Title('My apps')]
 class MyApps extends Crud
@@ -38,32 +39,68 @@ class MyApps extends Crud
         ];
     }
 
-    public function onCreated($created): void
+    public function onCreated($created, $refreshPage = false): void
     {
-        $this->formCreate["name"] = "";
-        $this->primary_color = config("app.default_theme_color");
-        if (MyApp::count() === 1) {
-            $this->dispatch("selectApp", $created->id, loadList: true);
-        } else {
-            $this->dispatch("loadAppsList", $created->id, loadList: true);
+        $user = Auth::user();
+        $seletectedApp = $user->settings->selected_app;
+        $found = $seletectedApp ? MyApp::find($seletectedApp) : null;
+
+        if (!$found) {
+            $settings = $user->settings;
+            $settings->selected_app = $created->id;
+            $user->settings = $settings;
+            $user->save();
+        }
+    }
+
+    public function create($refreshPage = false): void
+    {
+        $isFirst = MyApp::count() <= 0;
+        parent::create($isFirst);
+        if (!$isFirst) {
+            $this->dispatch('loadAppsList');
         }
     }
 
     public function makeEditForm($entity, $iconColor = '', $append = ''): string
     {
-        $id = $entity->id;
-        $this->formEdit["id"] = $id;
-        $this->formEdit["name"] = $entity->name;
         $this->formEdit["primary_color"] = $entity->primary_color;
+        $colorInput = $this->makeEditInput($entity, 'color', 'primary_color');
 
-        return parent::makeEditForm($entity, $entity->primary_color, <<<BLADE
-            <x-inline-edit index="primary_color" entityId="$id">
-                <x-slot name="source">
-                    <div class="h-10 w-full min-w-14 rounded-2xl flex items-center justify-center text-white text-2xl font-bold"
-                        style="background-color:  $entity->primary_color"></div>
-                </x-slot>
-                <x-input class="w-full" type="color" inputClass="h-10 py-1" required model="formEdit.primary_color" />
-            </x-inline-edit>
+        return parent::makeEditForm($entity, <<<BLADE
+           $colorInput
         BLADE);
+    }
+
+    public function editViewContainer($entity, $slot): string
+    {
+        $iconColor = $this->formEdit["primary_color"] = $entity->primary_color;
+
+        return <<<BLADE
+            <div class="w-full flex flex-col gap-4" style="--modal-item-default-color: $iconColor">
+                $slot
+            </div>
+        BLADE;
+    }
+
+    public function onSaveInline($index): void
+    {
+        parent::onSaveInline($index);
+        $this->dispatch('loadAppsList');
+    }
+
+    public function deleteEntity($id, $refreshPage = false): void
+    {
+        $user = Auth::user();
+        $seletectedApp = $user->settings->selected_app;
+        if ($seletectedApp == $id) {
+            $settings = $user->settings;
+            $settings->selected_app = MyApp::where("id", "!=", $id)->first()?->id;
+            $user->settings = $settings;
+            $user->save();
+        } else {
+            $this->dispatch('loadAppsList');
+        }
+        parent::deleteEntity($id, $seletectedApp == $id);
     }
 }

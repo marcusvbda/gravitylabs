@@ -17,6 +17,7 @@
     "dependencies": {
         "alpinejs": "^3.14.3",
         "flowbite": "^2.5.2",
-        "sass": "^1.80.4"
+        "sass": "^1.80.4",
+        "toastify-js": "^1.12.0"
     }
 }

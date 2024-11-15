@@ -37,7 +37,7 @@ class LoginPage extends Component
         ]);
 
         if ($validator->fails()) {
-            return $this->dispatch('onNewMessage', [
+            return $this->dispatch('sendMessage', [
                 'type' => 'error',
                 'text' => '<ul><li>' . implode('</li><li>', $validator->errors()->all()) . '</li></ul>'
             ]);
@@ -45,7 +45,7 @@ class LoginPage extends Component
 
         $logged = Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember);
         if (!$logged) {
-            return $this->dispatch('onNewMessage', [
+            return $this->dispatch('sendMessage', [
                 'type' => 'error',
                 'text' => 'Invalid credentials'
             ]);
