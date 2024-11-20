@@ -21,7 +21,6 @@ class MyApps extends Crud
         "primary_color" => "#2963e5"
     ];
 
-
     public function makeCreateForm(): string
     {
         $this->primary_color = config("app.default_theme_color");
@@ -65,7 +64,7 @@ class MyApps extends Crud
     public function makeEditForm($entity, $iconColor = '', $append = ''): string
     {
         $this->formEdit["primary_color"] = $entity->primary_color;
-        $colorInput = $this->makeEditInput($entity, 'color', 'primary_color');
+        $colorInput = $this->makeEditInput($entity, 'color', 'Primary color', 'primary_color');
 
         return parent::makeEditForm($entity, <<<BLADE
            $colorInput
@@ -89,18 +88,18 @@ class MyApps extends Crud
         $this->dispatch('loadAppsList');
     }
 
-    public function deleteEntity($id, $refreshPage = false): void
+    public function deleteEntity($refreshPage = false): void
     {
         $user = Auth::user();
         $seletectedApp = $user->settings->selected_app;
-        if ($seletectedApp == $id) {
+        if ($seletectedApp == $this->editingId) {
             $settings = $user->settings;
-            $settings->selected_app = MyApp::where("id", "!=", $id)->first()?->id;
+            $settings->selected_app = MyApp::where("id", "!=",  $this->editingId)->first()?->id;
             $user->settings = $settings;
             $user->save();
         } else {
             $this->dispatch('loadAppsList');
         }
-        parent::deleteEntity($id, $seletectedApp == $id);
+        parent::deleteEntity($seletectedApp == $this->editingId);
     }
 }

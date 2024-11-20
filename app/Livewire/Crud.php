@@ -98,8 +98,12 @@ class Crud extends PaginatedList
         $label = strtolower($this->label);
 
         return <<<BLADE
-                <div class="flex flex-col gap-2 items-start my-8 w-full">
-                    <a href="#" wire:click.prevent="deleteEntity($entity->id)" wire:confirm.prompt='Are you sure?\n\nType DELETE to confirm|DELETE' class="flex items-center gap-2 font-medium text-red-600 hover:underline ml-auto">
+                <div class="flex gap-4 items-start my-8 w-full">
+                    <a href="#" wire:click.prevent="updateEntity()" wire:confirm='Are you sure?' class="flex items-center gap-2 font-medium text-[var(--theme-color)] hover:underline ml-auto">
+                        <x-icons.check class="size-6"></x-icons.check>
+                        Save changes 
+                    </a>
+                    <a href="#" wire:click.prevent="deleteEntity()" wire:confirm.prompt='Are you sure?\n\nType DELETE to confirm|DELETE' class="flex items-center gap-2 font-medium text-red-600 hover:underline">
                         <x-icons.trash class="size-6"></x-icons.trash>
                         Delete $label
                     </a>
@@ -107,9 +111,9 @@ class Crud extends PaginatedList
         BLADE;
     }
 
-    public function deleteEntity($id, $refreshPage = false): void
+    public function deleteEntity($refreshPage = false): void
     {
-        app()->make($this->model)->findOrFail($id)->delete();
+        app()->make($this->model)->findOrFail($this->editingId)->delete();
         if ($refreshPage) {
             session()->flash('messages', [[
                 'type' => 'success',
@@ -149,7 +153,7 @@ class Crud extends PaginatedList
     public function makeEditForm($entity, $append = ''): string
     {
         $this->formEdit["name"] = $entity->name;
-        $inputName = $this->makeEditInput($entity, 'text', 'name');
+        $inputName = $this->makeEditInput($entity, 'text', "Name", 'name');
         $header = $this->makeHeaderEditForm($entity);
         return $this->editViewContainer($entity, <<<BLADE
                 $header
@@ -158,36 +162,20 @@ class Crud extends PaginatedList
         BLADE);
     }
 
-    public function makeEditInput($entity, $type, $index): string
+    public function makeEditInput($entity, $type, $label, $index): string
     {
-        $value = $entity->{$index};
         $formIndex = "formEdit.$index";
         if (in_array($type, ['text', 'number', 'password', 'email'])) {
             return <<<BLADE
-                <x-inline-edit index="$index" >
-                    <x-slot name="source">
-                        <h1 class="text-2xl text-left w-full font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                           $value
-                        </h1>
-                    </x-slot>
-                    <x-input class="w-full" type="$type" required model="$formIndex" />
-                </x-inline-edit>
+                <x-input class="w-full" label="$label" type="$type" required model="$formIndex" />
             BLADE;
         }
-
 
         if (in_array($type, ['color'])) {
             return <<<BLADE
-                <x-inline-edit index="$index" >
-                    <x-slot name="source">
-                        <div class="h-10 w-full min-w-14 rounded-2xl flex items-center justify-center text-white text-2xl font-bold"
-                            style="background-color:  $value"></div>
-                    </x-slot>
-                    <x-input class="w-full" type="color" inputClass="h-10 py-1" required model="$formIndex" />
-                </x-inline-edit>
+                <x-input class="w-full" label="$label" type="color" inputClass="h-10 py-1" required model="$formIndex" />
             BLADE;
         }
-
 
         return "type not supported";
     }
@@ -202,13 +190,33 @@ class Crud extends PaginatedList
         BLADE;
     }
 
-    public function onSaveInline($index): void
+    public function onUpdated($entity): void
+    {
+        // 
+    }
+
+    public function updateEntity($refreshPage = false): void
     {
         $entity = app()->make($this->model)->findOrFail($this->editingId);
-        $entity->{$index} = $this->formEdit[$index];
+        foreach ($this->formEdit as $index => $value) {
+            $entity->{$index} = $value;
+        }
         $entity->save();
+        $this->onUpdated($entity);
         $this->editForm = $this->makeEditForm($entity);
-        $this->dispatch('refreshCrudItem', $this->model, $this->editingId);
+        if ($refreshPage) {
+            session()->flash('messages', [[
+                'type' => 'success',
+                'text' => $this->label . ' successfully updated !'
+            ]]);
+            $this->redirect(url()->previous());
+        } else {
+            $this->dispatch('sendMessage', [
+                'type' => 'success',
+                'text' => $this->label . ' successfully updated !'
+            ]);
+            $this->dispatch('refreshCrudItem', $this->model, $this->editingId);
+        }
     }
 
     public function render(): View
