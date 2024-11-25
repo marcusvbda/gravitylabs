@@ -2,12 +2,15 @@
     @php
         $qty = $this->total;
     @endphp
-    <div wire:loading.remove>
-        {{ $qty }} {{ strtolower($qty === 0 ? $this->plural : ($qty > 1 ? $this->plural : $this->label)) }}
-    </div>
-    <div wire:loading>
-        <x-spinner class="size-6 mb-2" />
-    </div>
+    @if ($qty !== null)
+        <div>
+            {{ $qty }} {{ strtolower($qty === 0 ? $this->plural : ($qty > 1 ? $this->plural : $this->label)) }}
+        </div>
+    @else
+        <div wire:loading>
+            <x-spinner class="size-6 mb-2" />
+        </div>
+    @endif
 </div>
 
 <div class="gap-4 mt-4 grid grid-cols-1 md:grid-cols-2">

@@ -3,7 +3,6 @@
 use App\Http\Middleware\authMiddleware;
 use App\Livewire\Application\MyApps;
 use App\Livewire\Auth\LoginPage;
-use App\Livewire\Teste;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'auth', 'as' => 'auth.'], function () {
@@ -20,6 +19,5 @@ Route::middleware([authMiddleware::class])->group(function () {
         Route::group(['prefix' => 'applications', 'as' => 'applications.'], function () {
             Route::get('/', MyApps::class)->name('index')->lazy();
         });
-        Route::get('/test', Teste::class)->name("test")->lazy();
     });
 });
