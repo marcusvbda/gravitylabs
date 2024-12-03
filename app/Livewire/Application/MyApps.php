@@ -15,11 +15,26 @@ class MyApps extends Crud
     public $plural = "Apps";
     public $title = "My apps";
     public $createBtnText = 'Create an app';
+    public $formCreateBtnText = 'Get started';
     public $model = MyApp::class;
     public $formCreate = [
         "name" => "",
         "primary_color" => "#2963e5"
     ];
+
+
+    public function __construct()
+    {
+        parent::__construct();
+        if ($this->modelTotal > 0) {
+            $this->sidebar = [
+                'Quick links' => [
+                    'Applications' => 'app.applications.index',
+                    'Pages' => 'app.pages.index',
+                ]
+            ];
+        }
+    }
 
     public function makeCreateForm(): string
     {
@@ -80,12 +95,6 @@ class MyApps extends Crud
                 $slot
             </div>
         BLADE;
-    }
-
-    public function onSaveInline($index): void
-    {
-        parent::onSaveInline($index);
-        $this->dispatch('loadAppsList');
     }
 
     public function deleteEntity($refreshPage = false): void

@@ -15,8 +15,10 @@ class Crud extends PaginatedList
     public $plural;
     public $title;
     public $createBtnText;
+    public $formCreateBtnText;
     public $model;
     public $limit = 12;
+    public $modelTotal = 0;
     public $search = "";
     public $createForm = '';
     public $editForm = '';
@@ -29,6 +31,13 @@ class Crud extends PaginatedList
     public $formEdit = [
         'name' => '',
     ];
+
+    public $sidebar;
+
+    public function __construct()
+    {
+        $this->modelTotal = $this->getModel()->count();
+    }
 
     public function updated($field): void
     {

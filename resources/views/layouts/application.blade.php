@@ -4,9 +4,9 @@
 
 @section('body')
     <x-navbar :items="[
-        'My apps' => 'app.applications.index',
-        // 'Test' => 'app.test',
-    ]" />
+            // 'My apps' => 'app.applications.index',
+            // 'Test' => 'app.test',
+        ]" />
     <div class="flex flex-col md:flex-row">
         @hasSection('shortcust')
             <aside class="bg-gray-200 dark:bg-gray-800 border-r border-gray-300/50 dark:border-gray-700 w-full md:w-2/12">

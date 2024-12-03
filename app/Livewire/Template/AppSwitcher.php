@@ -23,9 +23,14 @@ class AppSwitcher extends PaginatedList
         $this->selectedApp = $found;
     }
 
+    public function getModel(): mixed
+    {
+        return  MyApp::query();
+    }
+
     public function makeQuery(): mixed
     {
-        return MyApp::where("id", "!=", $this->user->settings->selected_app)->orderBy("name", 'asc');
+        return $this->getModel()->where("id", "!=", $this->user->settings->selected_app)->orderBy("name", 'asc');
     }
 
     #[On('selectApp')]

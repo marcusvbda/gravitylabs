@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\authMiddleware;
 use App\Livewire\Application\MyApps;
+use App\Livewire\Application\Pages;
 use App\Livewire\Auth\LoginPage;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,9 @@ Route::middleware([authMiddleware::class])->group(function () {
         Route::get('/', fn() => redirect()->route('app.applications.index'));
         Route::group(['prefix' => 'applications', 'as' => 'applications.'], function () {
             Route::get('/', MyApps::class)->name('index')->lazy();
+        });
+        Route::group(['prefix' => 'pages', 'as' => 'pages.'], function () {
+            Route::get('/', Pages::class)->name('index')->lazy();
         });
     });
 });

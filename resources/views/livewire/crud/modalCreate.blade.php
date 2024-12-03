@@ -13,7 +13,7 @@
                 {!! $this->createForm !!}
             </div>
             <x-button type="submit">
-                Get started
+                {{ $formCreateBtnText }}
             </x-button>
         </form>
     </x-card>

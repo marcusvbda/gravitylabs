@@ -1,12 +1,9 @@
 <div wire:init="loadList" x-data="crud">
-    @section('shortcust')
-        <x-sidebar :items="[
-            'Quick links' => [
-                'Applications' => 'app.applications.index',
-                // 'Test' => 'app.test',
-            ],
-        ]" />
-    @endsection
+    @if ($sidebar)
+        @section('shortcust')
+            <x-sidebar :items="$sidebar" />
+        @endsection
+    @endif
 
     <h4 wire:ignore
         class="text-3xl flex items-center gap-2 text-gray-800 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-6">
@@ -27,6 +24,7 @@
                 </div>
             </div>
         @endif
+        @include('livewire/crud/qtyItems')
         @include('livewire/crud/listItems')
         @include('livewire/crud/modalCreate')
     </div>

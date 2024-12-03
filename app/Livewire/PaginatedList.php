@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Livewire\Attributes\On;
 
 class PaginatedList extends Component
@@ -19,9 +18,14 @@ class PaginatedList extends Component
         $this->items = collect([]);
     }
 
+    public function getModel(): mixed
+    {
+        return  app()->make($this->model);
+    }
+
     public function makeQuery(): mixed
     {
-        return Model::query();
+        return  $this->getModel()->query();
     }
 
     #[On('loadList')]
