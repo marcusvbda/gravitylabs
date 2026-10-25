@@ -1,38 +1,21 @@
-[![Docker](https://img.shields.io/badge/Docker-27.3-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
-[![PHP](https://img.shields.io/badge/PHP-8.3-777BB4?logo=php&logoColor=white)](https://www.php.net/releases/8.3/en.php)
-[![Nginx](https://img.shields.io/badge/Nginx-1.27-269539?logo=nginx&logoColor=white)](https://www.nginx.com/)
-[![Laravel](https://img.shields.io/badge/Laravel-11-FF2D20?logo=laravel&logoColor=white)](https://laravel.com/docs/11.x)
-[![Tailwindcss](https://img.shields.io/badge/Tailwindcss-14.2-06B6D4?logo=tailwindcss&logoColor=white)](http://supervisord.org/)
+# Landing page — design reference
 
-# Gravity Labs
+This is a design mockup created in a visual design tool, exported as a
+standalone page. Treat it as a REFERENCE MOCKUP, not production code:
+the markup and inline styles carry the design's precise values — colors,
+font sizes, spacing, radii, shadows, layout — which an implementation
+should replicate faithfully in its own components and styling system
+rather than copy wholesale.
 
----
+## Contents
 
-### Before install
-Make sure you have installed Docker Desktop. If you don't, follow the <a href="https://www.docker.com/get-started" target="_blank">Get Started with Docker</a>.
+- `Landing.dc.html` — the artboard (a Design Component: an `<x-dc>`
+  template + a small logic class). The values to replicate live in its
+  inline `style="…"` attributes and the `<helmet><style>` block.
+- `support.js`, `vendor/react*.js` — the runtime that renders the
+  component in a browser; not part of the design.
 
+## Viewing
 
-### Installation guide
-
-#### Clone the project
-    git clone git@github.com:marcusvbda/gravitylabs.git
-
-#### Enter project folder
-    cd gravitylabs
-
-#### Build the containers
-    make build
-
-**All done!** Everything should work with a single command. \
-The application will be available at:
-
-http://localhost:8000
-
-
-### Usefull commands
-#### Build Containers
-<sup>You only need to build containers once. After that you can just start them.</sup>
-
-    make build
-
-For command details, refer to the `makefile` in the application root.
+Serve the folder (e.g. `python3 -m http.server`) and open `Landing.dc.html`;
+some browsers block the scripts over file://.

@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gravity Labs — AI, Media &amp; Technology | Em breve</title>
+<meta name="description" content="Gravity Labs: inteligência artificial, mídia e tecnologia. Nosso site está chegando — saiba mais em breve.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0B1020">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://gravitylabs.com/">
+
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.png" type="image/png" sizes="320x320">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gravity Labs">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Gravity Labs — AI, Media &amp; Technology">
+<meta property="og:description" content="Inteligência artificial, mídia e tecnologia. Saiba mais em breve.">
+<meta property="og:url" content="https://gravitylabs.com/">
+<meta property="og:image" content="https://gravitylabs.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Símbolo e nome da Gravity Labs sobre fundo azul-escuro com órbitas">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gravity Labs — AI, Media &amp; Technology">
+<meta name="twitter:description" content="Inteligência artificial, mídia e tecnologia. Saiba mais em breve.">
+<meta name="twitter:image" content="https://gravitylabs.com/og.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Gravity Labs",
+  "slogan": "AI, Media & Technology",
+  "url": "https://gravitylabs.com/",
+  "logo": "https://gravitylabs.com/icon-192.png"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0B1020;
+  --fg: #F5F7FA;
+  --muted: #AEB6C8;
+  --faint: #8A93A8;
+  --line: #3A4258;
+  --accent: #FF6B2C;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); }
+body {
+  color: var(--fg);
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.stage {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px 72px;
+  background:
+    radial-gradient(60vmax 60vmax at 50% 50%, #131B38 0%, transparent 70%),
+    var(--bg);
+}
+
+/* ---------- órbitas ---------- */
+.orbits {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(1000px, 120vmin);
+  height: max(1000px, 120vmin);
+  margin: calc(max(1000px, 120vmin) / -2) 0 0 calc(max(1000px, 120vmin) / -2);
+  pointer-events: none;
+  transform: translate3d(calc(var(--px, 0) * 14px), calc(var(--py, 0) * 14px), 0);
+  transition: transform .6s var(--ease);
+  animation: fade 2.4s ease-out both;
+}
+.orbits svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.ring { fill: none; stroke-width: 2; }
+.spin { transform-origin: 500px 500px; animation: spin linear infinite; }
+.spin.a { animation-duration: 38s; }
+.spin.b { animation-duration: 64s; animation-direction: reverse; }
+.spin.c { animation-duration: 110s; }
+.halo { transform-box: fill-box; transform-origin: center; animation: pulse 3.2s ease-in-out infinite; }
+.twinkle { animation: twinkle 4s ease-in-out infinite; }
+.twinkle:nth-of-type(2n) { animation-delay: -1.6s; animation-duration: 5.5s; }
+.twinkle:nth-of-type(3n) { animation-delay: -3s; }
+
+/* ---------- conteúdo ---------- */
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+  text-align: center;
+}
+.mark { width: 132px; height: 132px; overflow: visible; }
+.mark .g {
+  fill: none;
+  stroke: var(--fg);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 1.4s .2s var(--ease) forwards;
+}
+.mark .dot {
+  fill: var(--accent);
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: land .7s 1.35s var(--ease) forwards;
+}
+.mark .dot-ring {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: ping 2.8s 1.9s ease-out infinite;
+}
+
+.title { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+h1 {
+  margin: 0;
+  font-size: clamp(44px, 11vw, 88px);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+h1 .word { display: inline-block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
+h1 .word > span {
+  display: inline-block;
+  transform: translateY(110%);
+  animation: rise 1s var(--ease) forwards;
+}
+h1 .word:nth-child(1) > span { animation-delay: .7s; }
+h1 .word:nth-child(2) > span { animation-delay: .82s; }
+.tagline {
+  font-size: clamp(12px, 3.2vw, 18px);
+  font-weight: 500;
+  letter-spacing: .32em;
+  color: var(--muted);
+  margin-right: -.32em;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 0 28px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  font-size: 18px;
+  font-weight: 500;
+  background: rgba(11, 16, 32, .6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: border-color .3s, transform .3s var(--ease);
+}
+.pill:hover { border-color: var(--accent); transform: translateY(-2px); }
+.pill i {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 rgba(255, 107, 44, .6);
+  animation: beacon 2s ease-out infinite;
+}
+
+.enter { opacity: 0; transform: translateY(14px); animation: enter .9s var(--ease) forwards; }
+.tagline.enter { animation-delay: 1.25s; }
+.pill.enter { animation-delay: 1.5s; }
+footer.enter { animation-delay: 1.8s; }
+
+footer {
+  position: absolute;
+  left: 0; right: 0; bottom: 28px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--faint);
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes land { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: scale(1); } }
+@keyframes ping { 0% { opacity: .7; transform: scale(1); } 100% { opacity: 0; transform: scale(2.4); } }
+@keyframes rise { to { transform: translateY(0); } }
+@keyframes enter { to { opacity: 1; transform: none; } }
+@keyframes pulse { 0%, 100% { opacity: .16; transform: scale(1); } 50% { opacity: .32; transform: scale(1.5); } }
+@keyframes twinkle { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
+@keyframes beacon { 0% { box-shadow: 0 0 0 0 rgba(255, 107, 44, .6); } 100% { box-shadow: 0 0 0 12px rgba(255, 107, 44, 0); } }
+
+a:focus-visible, .pill:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+@media (max-width: 520px) {
+  .content { gap: 28px; }
+  .mark { width: 104px; height: 104px; }
+  .pill { font-size: 16px; padding: 0 22px; min-height: 48px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .mark .g { stroke-dashoffset: 0; }
+  .mark .dot { opacity: 1; }
+  h1 .word > span { transform: none; }
+  .enter, .orbits { opacity: 1; transform: none; }
+  .orbits { transform: none; }
+}
+</style>
+</head>
+<body>
+<main class="stage">
+
+  <div class="orbits" aria-hidden="true">
+    <svg viewBox="0 0 1000 1000">
+      <circle class="ring" cx="500" cy="500" r="190" stroke="#1B2442"/>
+      <circle class="ring" cx="500" cy="500" r="320" stroke="#161E38"/>
+      <circle class="ring" cx="500" cy="500" r="450" stroke="#121A31"/>
+
+      <g class="spin a">
+        <circle class="halo" cx="820" cy="500" r="18" fill="#FF6B2C"/>
+        <circle cx="820" cy="500" r="7" fill="#FF6B2C"/>
+      </g>
+      <g class="spin b">
+        <circle class="twinkle" cx="500" cy="310" r="4" fill="#3A4258"/>
+        <circle class="twinkle" cx="335" cy="595" r="3" fill="#2A3350"/>
+      </g>
+      <g class="spin c">
+        <circle class="twinkle" cx="276" cy="276" r="5" fill="#3A4258"/>
+        <circle class="twinkle" cx="690" cy="860" r="4" fill="#2A3350"/>
+        <circle class="twinkle" cx="150" cy="620" r="4" fill="#2A3350"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="content">
+    <svg class="mark" viewBox="0 0 120 120" role="img" aria-label="Símbolo Gravity Labs">
+      <path class="g" pathLength="1" d="M 94 38 A 40 40 0 1 0 100 60 H 62"/>
+      <circle class="dot-ring" cx="99" cy="46" r="8"/>
+      <circle class="dot" cx="99" cy="46" r="8"/>
+    </svg>
+
+    <div class="title">
+      <h1 aria-label="Gravity Labs"><span class="word" aria-hidden="true"><span>Gravity</span></span> <span class="word" aria-hidden="true"><span>Labs</span></span></h1>
+      <span class="tagline enter">AI, MEDIA &amp; TECHNOLOGY</span>
+    </div>
+
+    <div class="pill enter"><i></i><span>Saiba mais em breve</span></div>
+  </div>
+
+  <footer class="enter">© 2026 Gravity Labs</footer>
+</main>
+
+<script>
+(function () {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var el = document.querySelector('.orbits');
+  addEventListener('pointermove', function (e) {
+    el.style.setProperty('--px', (e.clientX / innerWidth - .5) * 2);
+    el.style.setProperty('--py', (e.clientY / innerHeight - .5) * 2);
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>
