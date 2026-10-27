@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gravitylabs.com/sitemap.xml
+Sitemap: https://www.gravitylabs.com.br/sitemap.xml

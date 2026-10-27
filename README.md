@@ -1,21 +1,25 @@
-# Landing page — design reference
+# Gravity Labs — site
 
-This is a design mockup created in a visual design tool, exported as a
-standalone page. Treat it as a REFERENCE MOCKUP, not production code:
-the markup and inline styles carry the design's precise values — colors,
-font sizes, spacing, radii, shadows, layout — which an implementation
-should replicate faithfully in its own components and styling system
-rather than copy wholesale.
+Site institucional da Gravity Labs (https://www.gravitylabs.com.br/), em PT-BR.
 
-## Contents
+Página única em HTML e CSS estáticos, sem build. O único JavaScript anima a conversa
+de exemplo do hero e respeita `prefers-reduced-motion`; sem JavaScript, a conversa aparece inteira.
 
-- `Landing.dc.html` — the artboard (a Design Component: an `<x-dc>`
-  template + a small logic class). The values to replicate live in its
-  inline `style="…"` attributes and the `<helmet><style>` block.
-- `support.js`, `vendor/react*.js` — the runtime that renders the
-  component in a browser; not part of the design.
+## Estrutura
 
-## Viewing
+- `public/index.html` — o site inteiro (estilos e script inline).
+- `public/robots.txt`, `public/sitemap.xml` — SEO.
+- `public/og.png`, ícones — imagem de compartilhamento e favicons.
+- `vercel.json` — publica a pasta `public` na Vercel.
+- `support.js`, `vendor/` — runtime da exportação antiga do mockup "em breve"; não é servido.
 
-Serve the folder (e.g. `python3 -m http.server`) and open `Landing.dc.html`;
-some browsers block the scripts over file://.
+## Antes de publicar
+
+Troque `WHATSAPP_NUMBER` em `public/index.html` pelo número com DDI e DDD, só dígitos
+(ex.: `5514999999999`), e confira o e-mail de contato.
+
+## Ver localmente
+
+```bash
+cd public && python3 -m http.server 8080
+```
