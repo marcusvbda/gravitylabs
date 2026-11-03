@@ -10,6 +10,7 @@ de exemplo do hero e respeita `prefers-reduced-motion`; sem JavaScript, a conver
 - `public/index.html` — o site inteiro (estilos e script inline).
 - `public/robots.txt`, `public/sitemap.xml` — SEO.
 - `public/og.png`, ícones — imagem de compartilhamento e favicons.
+- `public/img/` — imagens da seção Cases (logo e prévia do Talent Labs; a prévia é um recorte de https://talentlabs.tech, com dados de exemplo).
 - `vercel.json` — publica a pasta `public` na Vercel.
 - `support.js`, `vendor/` — runtime da exportação antiga do mockup "em breve"; não é servido.
 
@@ -21,5 +22,7 @@ Troque `WHATSAPP_NUMBER` em `public/index.html` pelo número com DDI e DDD, só 
 ## Ver localmente
 
 ```bash
-cd public && python3 -m http.server 8080
+yarn dev
 ```
+
+Abre em http://localhost:8080 (serve a pasta `public` com `python3 -m http.server`, sem dependências).

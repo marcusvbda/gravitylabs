@@ -37,7 +37,13 @@
   "slogan": "AI, Media & Technology",
   "description": "Consultoria de tecnologia e IA: agentes de atendimento, automação, software sob medida e presença digital.",
   "url": "https://www.gravitylabs.com.br/",
-  "logo": "https://www.gravitylabs.com.br/icon-192.png"
+  "logo": "https://www.gravitylabs.com.br/icon-192.png",
+  "brand": {
+    "@type": "Brand",
+    "name": "Talent Labs",
+    "url": "https://talentlabs.tech",
+    "logo": "https://www.gravitylabs.com.br/img/talentlabs-icon.svg"
+  }
 }
 </script>
 
@@ -236,6 +242,31 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 .service ul { list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .service li { font-size: 14px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); }
 
+.cases { background: var(--ink); color: var(--white); }
+.cases .section-head p { color: var(--night-muted); }
+.case { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 460px); gap: 56px; padding: 56px; background: #10172B; border: 1px solid var(--night-line); border-radius: 28px; }
+.case-tag { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; padding: 6px 16px 6px 6px; border: 1px solid var(--night-line); border-radius: 999px; font-size: 14px; line-height: 1.3; color: var(--night-muted); }
+.case-tag img { width: 28px; height: 28px; border-radius: 8px; }
+.case-tag strong { color: var(--white); font-weight: 600; }
+.case-tag .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--night-muted); opacity: .6; }
+.case h3 { margin-top: 28px; font-size: clamp(32px, 4vw, 48px); max-width: 16ch; }
+.case-lead { margin: 24px 0 0; font-size: 20px; color: var(--night-muted); max-width: 52ch; }
+.case-points { counter-reset: point; list-style: none; margin: 32px 0 0; padding: 0; border-top: 1px solid var(--night-line); }
+.case-points li { counter-increment: point; display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--night-line); font-size: 17px; line-height: 1.5; color: var(--night-muted); }
+.case-points li::before { content: "0" counter(point); padding-top: 2px; font-size: 14px; font-weight: 600; color: var(--accent); }
+.case-points strong { color: var(--white); font-weight: 600; }
+.case-stack { list-style: none; margin: 28px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.case-stack li { font-size: 14px; padding: 6px 12px; border: 1px solid var(--night-line); border-radius: 999px; color: var(--white); }
+.case .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
+.case .btn-line { color: var(--white); border-color: var(--night-line); }
+.case .btn-line:hover { border-color: var(--white); }
+.case-visual { display: flex; flex-direction: column; gap: 16px; align-self: start; min-width: 0; position: sticky; top: 24px; }
+.case-logo { display: block; border-radius: 18px; overflow: hidden; }
+.case-logo img, .case-shot img { width: 100%; height: auto; }
+.case-shot { margin: 0; }
+.case-shot img { border-radius: 22px; }
+.case-shot figcaption { margin-top: 12px; font-size: 14px; color: var(--night-muted); }
+
 .idea .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: end; }
 .idea h2 { font-size: clamp(44px, 6.4vw, 88px); line-height: .98; max-width: none; }
 .idea h2 em { font-style: normal; color: var(--accent-ink); }
@@ -252,6 +283,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 .about-box { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; padding: 56px; background: var(--white); border: 1px solid var(--line); border-radius: 28px; }
 .about-box h2 { font-size: clamp(32px, 4vw, 48px); }
 .about-box p { margin: 0; color: var(--ink-2); font-size: 19px; }
+.about-box p a { color: var(--accent-ink); font-weight: 600; }
 
 .faq { background: var(--white); border-top: 1px solid var(--line); }
 .faq .wrap { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 64px; }
@@ -274,6 +306,8 @@ details p { margin: 0 0 24px; color: var(--ink-2); max-width: 56ch; }
 
 .footer { background: var(--ink); color: var(--night-muted); border-top: 1px solid var(--night-line); font-size: 15px; }
 .footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 28px; padding-bottom: 28px; }
+.footer a { text-decoration: none; }
+.footer a:hover { color: var(--white); }
 
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
@@ -288,8 +322,10 @@ details p { margin: 0 0 24px; color: var(--ink-2); max-width: 56ch; }
 
 /* ---------- responsivo ---------- */
 @media (max-width: 980px) {
-  .demo .wrap, .idea .wrap, .about-box, .faq .wrap { grid-template-columns: minmax(0, 1fr); }
+  .demo .wrap, .idea .wrap, .about-box, .faq .wrap, .case { grid-template-columns: minmax(0, 1fr); }
   .demo .wrap { gap: 48px; }
+  .case { gap: 48px; }
+  .case-visual { max-width: 460px; position: static; }
   .chat { justify-self: start; }
   .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 48px; }
   .idea .wrap { gap: 32px; }
@@ -305,6 +341,9 @@ details p { margin: 0 0 24px; color: var(--ink-2); max-width: 56ch; }
   .service, .service:nth-child(2n) { padding: 32px 0 36px; border-left: 0; }
   .service h3 { font-size: 26px; }
   .about-box { padding: 32px 24px; gap: 20px; }
+  .case { padding: 32px 24px; gap: 40px; }
+  .case-lead { font-size: 19px; }
+  .case-points li { font-size: 16px; }
   .contact .wrap { padding-top: 88px; padding-bottom: 88px; }
   .stage .lead, .demo .lead { font-size: 19px; }
   .mark { width: 92px; height: 92px; margin-bottom: 28px; }
@@ -313,7 +352,10 @@ details p { margin: 0 0 24px; color: var(--ink-2); max-width: 56ch; }
 }
 @media (max-width: 520px) {
   .steps { grid-template-columns: minmax(0, 1fr); row-gap: 36px; }
-  .stage .actions .btn, .contact .actions .btn { width: 100%; }
+  .case-tag { border-radius: 22px; }
+  .case-tag .dot { display: none; }
+  .case-tag span:last-child { flex-basis: 100%; padding-left: 38px; }
+  .stage .actions .btn, .contact .actions .btn, .case .actions .btn { width: 100%; }
   .header .btn span { display: none; }
   .header .btn { width: 44px; padding: 0; }
 }
@@ -337,6 +379,7 @@ details p { margin: 0 0 24px; color: var(--ink-2); max-width: 56ch; }
     </a>
     <nav class="nav" aria-label="Principal">
       <a href="#servicos">Serviços</a>
+      <a href="#cases">Cases</a>
       <a href="#como-funciona">Como funciona</a>
       <a href="#duvidas">Dúvidas</a>
     </nav>
@@ -461,6 +504,60 @@ details p { margin: 0 0 24px; color: var(--ink-2); max-width: 56ch; }
     </div>
   </section>
 
+  <section class="section cases" id="cases">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Cases</p>
+          <h2>A gente também constrói produto próprio.</h2>
+        </div>
+        <p>Além dos projetos para clientes, a Gravity Labs cria e opera os próprios produtos. Este é o Talent Labs, hoje em beta.</p>
+      </div>
+
+      <article class="case" aria-labelledby="case-talentlabs">
+        <div>
+          <p class="case-tag">
+            <img src="/img/talentlabs-icon.svg" width="28" height="28" alt="" loading="lazy">
+            <strong>Talent Labs</strong>
+            <span class="dot" aria-hidden="true"></span>
+            <span>Beta fechada · acesso por convite</span>
+          </p>
+          <h3 id="case-talentlabs">Candidaturas enviadas do seu próprio e-mail.</h3>
+          <p class="case-lead">Talent Labs encontra vagas de tecnologia (engenharia, QA, produto e suporte), filtra pelas suas preferências e envia cada candidatura do seu próprio email, uma empresa por vez, no idioma da vaga.</p>
+
+          <ol class="case-points">
+            <li><span><strong>Vagas de várias fontes.</strong> Um LLM extrai dados estruturados de cada anúncio: stack, senioridade, local e se é remoto.</span></li>
+            <li><span><strong>Contato certo na empresa.</strong> O produto localiza o contato de recrutamento antes de enviar.</span></li>
+            <li><span><strong>Sai do seu e-mail.</strong> Candidaturas personalizadas, com modelos e currículos em inglês e português, enviadas do Gmail, Outlook ou SMTP do candidato.</span></li>
+            <li><span><strong>Você no controle.</strong> Uma candidatura por empresa, envio espaçado, um por vez, e a caixa de entrada nunca é lida.</span></li>
+          </ol>
+
+          <ul class="case-stack" aria-label="Tecnologias usadas">
+            <li>Laravel</li><li>Filament</li><li>Reverb</li><li>Filas</li><li>OpenAI API</li>
+          </ul>
+
+          <div class="actions">
+            <a class="btn btn-accent" href="https://talentlabs.tech" target="_blank" rel="noopener">
+              Conhecer o Talent Labs
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+            </a>
+            <a class="btn btn-line" href="https://wa.me/5514996766177?text=Ol%C3%A1!%20Vi%20o%20Talent%20Labs%20no%20site%20da%20Gravity%20Labs%20e%20queria%20conversar%20sobre%20um%20produto.">Quero um desses</a>
+          </div>
+        </div>
+
+        <div class="case-visual">
+          <a class="case-logo" href="https://talentlabs.tech" target="_blank" rel="noopener" aria-label="Talent Labs, abrir o site">
+            <img src="/img/talentlabs-banner.jpg" width="1500" height="500" alt="Logotipo do Talent Labs" loading="lazy">
+          </a>
+          <figure class="case-shot">
+            <img src="/img/talentlabs-preview.webp" width="1200" height="1454" alt="Painel do Talent Labs com 19 de 50 candidaturas enviadas hoje, envio ao vivo em etapas (validando destinatário, adaptando modelo, anexando currículo, enviando) e atividade recente" loading="lazy">
+            <figcaption>Prévia do produto, com dados de exemplo.</figcaption>
+          </figure>
+        </div>
+      </article>
+    </div>
+  </section>
+
   <section class="section idea">
     <div class="wrap">
       <h2>Tem algo que só existe na sua cabeça? <em>Vamos tirar do papel.</em></h2>
@@ -495,7 +592,7 @@ details p { margin: 0 0 24px; color: var(--ink-2); max-width: 56ch; }
           <p class="eyebrow">Quem somos</p>
           <h2>Time enxuto. Você fala direto com quem constrói.</h2>
         </div>
-        <p>A Gravity Labs é uma consultoria de tecnologia e IA. Sem intermediários: quem entende o seu problema é quem entrega a solução, com atenção a cada detalhe.</p>
+        <p>A Gravity Labs é uma consultoria de tecnologia e IA. Sem intermediários: quem entende o seu problema é quem entrega a solução, com atenção a cada detalhe. Além dos projetos para clientes, desenvolvemos produtos próprios, como o <a href="#cases">Talent Labs</a>.</p>
       </div>
     </div>
   </section>
@@ -548,6 +645,7 @@ details p { margin: 0 0 24px; color: var(--ink-2); max-width: 56ch; }
 <footer class="footer">
   <div class="wrap">
     <span>© 2026 Gravity Labs</span>
+    <a href="https://talentlabs.tech" target="_blank" rel="noopener">Talent Labs ↗</a>
     <span>AI, Media &amp; Technology</span>
   </div>
 </footer>
